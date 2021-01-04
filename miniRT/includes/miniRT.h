@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 22:35:51 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/04 02:42:26 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/04 04:10:44 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ int					color_col_to_int(t_color col);
 t_color				color_scala_multi(t_color a, double t);
 t_color				color_init(double r, double g, double b);
 t_color				color_plus(t_color a, t_color b);
+int					sphere_hit(t_vec center, double radius, t_vec origin, t_vec dir);
 
 #endif

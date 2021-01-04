@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 01:28:54 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/04 02:38:30 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/04 04:10:51 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,5 @@ t_color			color_init(double r, double g, double b)
 	ret.r = r;
 	ret.g = g;
 	ret.b = b;
-	retrun (ret);
+	return (ret);
 }

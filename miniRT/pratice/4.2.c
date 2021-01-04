@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 21:37:36 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/04 04:10:45 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/04 03:32:54 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,11 @@ int		main()
 			dir = vec_minus(dir, origin);
 		
 			t_vec unit_dir = vec_to_unit(dir);
-			
 			double t = 0.5 * (unit_dir.y + 1.0);
 			t_color pixel_color = color_scala_multi(color_init(1.0, 1.0, 1.0), (1.0 - t));
 			t_color pixel_color2 = color_scala_multi(color_init(0.5, 0.7, 1.0), t);
 			pixel_color = color_plus(pixel_color, pixel_color2);
-			if (sphere_hit(vec_init(0, 0, -1), 0.5, origin, dir))
-				pixel_color = color_init(1, 0, 0);
+			
 			ft_mlx_pixel_put(&img, i, image_height - j, pixel_color);
 		}
 	}

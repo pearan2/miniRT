@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 22:42:11 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/04 00:47:52 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/04 04:10:48 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_vec			vec_plus(t_vec a, t_vec b)
     t_vec			ret;
     ret.x = a.x + b.x;
     ret.y = a.y + b.y;
-    ret.z = a.z = b.z;
+    ret.z = a.z + b.z;
     return (ret);
 }
 
