@@ -6,13 +6,13 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 03:45:47 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/04 04:10:46 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/06 04:41:06 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-int			sphere_hit(t_vec center, double radius, t_vec origin, t_vec dir)
+double			sphere_hit(void *data, t_vec origin, t_vec u_dir)
 {
 	t_vec		oc;
 	double		a;
@@ -20,12 +20,40 @@ int			sphere_hit(t_vec center, double radius, t_vec origin, t_vec dir)
 	double		c;
 	double		disc;
 
-	oc = vec_minus(origin, center);
-	a = vec_dot(dir, dir);
-	b = 2.0 * vec_dot(oc, dir);
-	c = vec_dot(oc, oc) - radius * radius;
-	disc = b * b - 4 * a * c;
-	if (disc > 0)
-		return (1);
-	return (0);
+	oc = vec_minus(origin, ((t_data_sphere *)data)->center);
+	a = vec_dot(u_dir, u_dir);
+	b = 2.0 * vec_dot(oc, u_dir);
+	if (b > 0)
+		return (-1.0);
+	c = vec_dot(oc, oc) - (((t_data_sphere *)data)->radius * ((t_data_sphere *)data)->radius);
+	disc = (b * b) - (4 * a * c);
+	if (disc <= 0)
+		return (-1.0);
+	return ((-b - sqrt(disc)) / (2.0 * a));
+}
+
+t_vec			sphere_get_nor(t_data_sphere *data, t_vec origin, t_vec u_dir, double t)
+{
+	t_vec			ret;
+
+	ret = ray_at(origin, u_dir, t);
+	ret = vec_minus(ret, data->center);
+	ret = vec_to_unit(ret);
+	return (ret);
+}
+
+double			sphere_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_vec origin)
+{
+	t_vec			al;
+	t_vec			nor;
+	t_vec			u_dir;
+
+	u_dir = vec_minus(map->lights[lig_idx]->center, origin);
+	u_dir = vec_to_unit(u_dir);
+	t_vec center = ((t_data_sphere *)map->objs[obj_idx]->data)->center;
+	nor = vec_minus(origin, center);
+	nor = vec_to_unit(nor);
+	if (ray_is_block(map, obj_idx, origin, u_dir) != -1.0)
+		return (0);
+	return (fmax(0, vec_dot(u_dir, nor)));
 }

@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 22:35:51 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/04 04:10:44 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/06 04:40:11 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <mlx.h>
 # include <math.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <float.h>
 
 typedef struct			s_data
 {
@@ -39,6 +42,51 @@ typedef struct          s_vec
     double              z;
 }                       t_vec;
 
+typedef enum			e_obj_type
+{
+	sphere
+}						t_obj_type;
+
+typedef struct			s_obj
+{
+	void *				data;
+	t_obj_type			type;
+}						t_obj;
+
+typedef struct			s_data_sphere
+{
+	t_vec				center;
+	double				radius;
+	t_color				color;
+}						t_data_sphere;
+
+typedef struct			s_light
+{
+	t_vec				center;
+	double				lux;
+	t_color				color;
+	double				kd;
+}						t_light;
+
+
+typedef struct			s_map_info
+{
+	double				apsect_ratio;
+	int					image_width;
+	int					image_height;
+	double				viewport_height;
+	double				viewport_width;
+	double				focal_length;
+	t_vec				origin;
+	t_vec				horizontal;
+	t_vec				vertical;
+	t_vec				lower_left_corner;
+	t_obj				**objs;
+	t_light				**lights;
+	size_t				objs_num;
+	size_t				lights_num;
+}						t_map_info;
+
 double				vec_length_squared(t_vec a);
 double				vec_length(t_vec a);
 double				vec_dot(t_vec a, t_vec b);
@@ -55,6 +103,10 @@ int					color_col_to_int(t_color col);
 t_color				color_scala_multi(t_color a, double t);
 t_color				color_init(double r, double g, double b);
 t_color				color_plus(t_color a, t_color b);
-int					sphere_hit(t_vec center, double radius, t_vec origin, t_vec dir);
+double				sphere_hit(void *data, t_vec origin, t_vec dir);
+t_vec				sphere_get_nor(t_data_sphere *data, t_vec origin, t_vec u_dir, double t);
+t_vec				ray_at(t_vec origin, t_vec u_dir, double t);
+double				sphere_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_vec origin);
+double				ray_is_block(t_map_info *map, size_t obj_idx, t_vec origin, t_vec u_dir);
 
 #endif

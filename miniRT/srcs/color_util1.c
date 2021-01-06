@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 01:28:54 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/04 04:10:51 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/06 02:13:20 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int				color_col_to_int(t_color col)
 	g = col.g * 255;
 	b = col.b * 255;
 	ret = r;
+	ret = ret & 255;
 	ret = (ret << 8) + g;
 	ret = (ret << 8) + b;
 	return (ret);
@@ -50,9 +51,9 @@ t_color			color_scala_multi(t_color a, double t)
 {
 	t_color				ret;
 
-	ret.r = a.r * t;
-	ret.b = a.b * t;
-	ret.g = a.g * t;
+	ret.r = fmin(a.r, a.r * t);
+	ret.b = fmin(a.b, a.b * t);
+	ret.g = fmin(a.g, a.g * t);
 	return (ret);
 }
 

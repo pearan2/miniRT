@@ -6,7 +6,7 @@
 #    By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/03 21:49:15 by honlee            #+#    #+#              #
-#    Updated: 2021/01/04 04:10:43 by honlee           ###   ########seoul.kr   #
+#    Updated: 2021/01/06 01:59:31 by honlee           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ SRCNAME		=		\
 					mlx_util1.c\
 					color_util1.c\
 					color_util2.c\
-					sphere_util1.c
+					sphere_util1.c\
+					ray_util1.c
 SRCS		=		${addprefix ${SRCDIR}, ${SRCNAME}}
 INCDIR		=		./includes/
 CC			=		clang
