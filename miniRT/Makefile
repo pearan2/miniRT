@@ -6,7 +6,7 @@
 #    By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/03 21:49:15 by honlee            #+#    #+#              #
-#    Updated: 2021/01/06 18:01:45 by honlee           ###   ########seoul.kr   #
+#    Updated: 2021/01/06 18:59:35 by honlee           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,10 @@ SRCNAME		=		\
 					color_util2.c\
 					sphere_util1.c\
 					ray_util1.c\
-					shade_util1.c
+					shade_util1.c\
+					get_next_line.c\
+					get_next_line_utils.c\
+					ft_split.c
 SRCS		=		${addprefix ${SRCDIR}, ${SRCNAME}}
 INCDIR		=		./includes/
 CC			=		clang

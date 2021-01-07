@@ -6,13 +6,14 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 12:23:33 by honlee            #+#    #+#             */
-/*   Updated: 2020/12/31 13:40:43 by honlee           ###   ########.fr       */
+/*   Updated: 2021/01/06 18:58:07 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+# define BUFFER_SIZE 100
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>

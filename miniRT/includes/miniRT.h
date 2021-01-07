@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 22:35:51 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/06 18:48:03 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/06 19:10:07 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ typedef struct			s_data_sphere
 typedef struct			s_light
 {
 	t_vec				center;
-	double				lux;
 	t_color				color;
 	double				ratio;
 	double				spec_n;
@@ -97,6 +96,8 @@ typedef struct			s_map_info
 	size_t				lights_num;
 }						t_map_info;
 
+int					get_next_line(int fd, char **line);
+char				**ft_split(char const *str, char c);
 double				vec_length_squared(t_vec a);
 double				vec_length(t_vec a);
 double				vec_dot(t_vec a, t_vec b);

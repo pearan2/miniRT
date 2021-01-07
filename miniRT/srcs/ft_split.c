@@ -6,11 +6,11 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 17:14:08 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/07 11:54:20 by honlee           ###   ########.fr       */
+/*   Updated: 2021/01/06 18:57:02 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "miniRT.h"
 
 static size_t	ft_get_next(char const *str, char c, size_t s, int is_s)
 {
