@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   split_util1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 03:13:25 by honlee            #+#    #+#             */
-/*   Updated: 2020/12/01 12:22:43 by honlee           ###   ########.fr       */
+/*   Updated: 2021/01/06 21:06:53 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-unsigned int	ft_next(char *str, char *charset, unsigned int s, int is_sep);
+#include "miniRT.h"
 
 unsigned int	ft_get_cnt(char *str, char *charset)
 {
@@ -97,7 +95,7 @@ char			**ft_split(char *str, char *charset)
 	{
 		e = ft_next(str, charset, s, 1);
 		if (!(ret[idx] = (char *)malloc(e - s + 1)))
-			return (0);
+			return (ft_split_free(ret, idx));
 		ft_sc(ret[idx], str, s, e);
 		idx++;
 		s = ft_next(str, charset, e, 0);

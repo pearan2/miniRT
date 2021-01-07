@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 22:35:51 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/06 20:15:52 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/07 04:25:52 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <float.h>
+# include <string.h>
+# include <errno.h>
+
+# define RESOL_X_MAX 1920
+# define RESOL_Y_MAX 1080
+# define PI 3.1415926535897
 
 typedef struct			s_data
 {
@@ -88,9 +94,11 @@ typedef struct			s_map_info
 	double				apsect_ratio;
 	int					image_width;
 	int					image_height;
+	t_vec				orient;
 	double				viewport_height;
 	double				viewport_width;
 	double				focal_length;
+	double				fov_horizontal;
 	t_vec				origin;
 	t_vec				horizontal;
 	t_vec				vertical;
@@ -100,10 +108,17 @@ typedef struct			s_map_info
 	t_light				ambient;
 	size_t				objs_num;
 	size_t				lights_num;
+	size_t				l_iter;
+	size_t				o_iter;
+	size_t				r_cnt;
+	size_t				c_cnt;
+	size_t				a_cnt;
 }						t_map_info;
 
 int					get_next_line(int fd, char **line);
-char				**ft_split(char const *str, char c);
+char				**ft_split(char *str, char *charset);
+char				**ft_split_free(char **target, unsigned int idx);
+unsigned int		ft_next(char *str, char *charset, unsigned int s, int is_sep);
 int					ft_atoi(const char *str);
 double				ft_atod(const char *str);
 double				vec_length_squared(t_vec a);
@@ -129,6 +144,21 @@ t_shade				sphere_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_v
 double				ray_is_block(t_map_info *map, size_t obj_idx, t_vec origin, t_vec u_dir);
 t_shade				shade_init(double a, double b, double c);
 t_shade				shade_plus(t_shade a, t_shade b);
-int					ft_puterror(void);
+int					ft_puterror(int opt);
 int					parse_make_map(t_map_info *map, const char *path);
+int					ft_close(int fd, int ret);
+size_t				parse_spl_len(char **splited);
+char				**ft_split_free(char **target, unsigned int idx);
+int					ft_is_double(const char *str);
+int					parse_color(char **splited, t_color *col);
+int					parse_vec(char **splited, t_vec *vec);
+int					parse_cam(t_map_info *map, char ** splited);
+int					parse_light(t_map_info *map, char **splited);
+int					ft_free(void *target, int ret);
+int					parse_sphere(t_map_info *m, char **splited);
+int					parse_mapper(t_map_info *map, char **splited);
+void				map_free(t_map_info *map);
+double				ft_to_radian(double input);
+double				ft_to_degree(double input);
+
 #endif

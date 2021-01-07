@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atod.c                                          :+:      :+:    :+:   */
+/*   convert_util1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 13:55:48 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/06 20:53:06 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/07 04:25:48 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,14 @@ double		ft_atod(const char *str)
 		div = div * 10.0;
 	}
 	return (is_minus == 0 ? ret : (-1.0) * ret);
+}
+
+double		ft_to_radian(double input)
+{
+	return (input * (PI / 180));
+}
+
+double		ft_to_degree(double input)
+{
+	return (input * 57.3);
 }
