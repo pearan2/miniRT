@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_util1.c                                        :+:      :+:    :+:   */
+/*   error_util1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/04 00:06:50 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/06 19:42:57 by honlee           ###   ########seoul.kr  */
+/*   Created: 2021/01/06 19:16:10 by honlee            #+#    #+#             */
+/*   Updated: 2021/01/06 19:32:09 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-void	ft_mlx_pixel_put(t_data *data, int x, int y, t_color col)
+int				ft_puterror(void)
 {
-	char		*dst;
-	int			offset;
-
-	offset = (y * data->line_length + x * (data->bits_per_pixel / 8));
-	dst = data->addr + offset;
-	*(unsigned int *)dst = color_col_to_int(col);
+	write(2, "Error\n", 6);
+	return (-1);
 }

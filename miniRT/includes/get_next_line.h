@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 12:23:33 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/06 18:58:07 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/06 19:43:51 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # define BUFFER_SIZE 100
+# define OPEN_MAX 1
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>

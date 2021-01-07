@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 22:35:51 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/06 19:10:07 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/06 20:15:52 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <mlx.h>
 # include <math.h>
 # include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
 # include <stdio.h>
 # include <float.h>
 
@@ -51,7 +53,11 @@ typedef struct			s_shade
 
 typedef enum			e_obj_type
 {
-	sphere
+	sphere,
+	triangle,
+	cylinder,
+	square,
+	plane
 }						t_obj_type;
 
 typedef struct			s_obj
@@ -98,6 +104,8 @@ typedef struct			s_map_info
 
 int					get_next_line(int fd, char **line);
 char				**ft_split(char const *str, char c);
+int					ft_atoi(const char *str);
+double				ft_atod(const char *str);
 double				vec_length_squared(t_vec a);
 double				vec_length(t_vec a);
 double				vec_dot(t_vec a, t_vec b);
@@ -121,5 +129,6 @@ t_shade				sphere_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_v
 double				ray_is_block(t_map_info *map, size_t obj_idx, t_vec origin, t_vec u_dir);
 t_shade				shade_init(double a, double b, double c);
 t_shade				shade_plus(t_shade a, t_shade b);
-
+int					ft_puterror(void);
+int					parse_make_map(t_map_info *map, const char *path);
 #endif

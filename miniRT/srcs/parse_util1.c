@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   parse_util1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/21 13:55:48 by honlee            #+#    #+#             */
-/*   Updated: 2020/12/22 13:10:45 by honlee           ###   ########.fr       */
+/*   Created: 2021/01/06 19:21:36 by honlee            #+#    #+#             */
+/*   Updated: 2021/01/06 19:56:49 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "miniRT.h"
 
-int			ft_atoi(const char *str)
+void			parse_get_num(int fd, size_t *num_lights, size_t *num_objs)
 {
-	unsigned int		ret;
-	unsigned int		is_minus;
 
-	ret = 0;
-	is_minus = 0;
-	while ((*str <= '\r' && *str >= '\t') || *str == ' ')
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			is_minus = 1;
-		str++;
-	}
-	while (*str <= '9' && *str >= '0')
-		ret = (ret * 10) + (*str++) - '0';
-	if (is_minus)
-		return (ret * (-1));
-	return (ret);
+}
+
+int				parse_make_map(t_map_info *map, const char *path)
+{
+	map = 0;
+	path = 0;
+	return (0);
 }

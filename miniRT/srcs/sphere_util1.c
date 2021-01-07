@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 03:45:47 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/06 18:48:04 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/06 19:46:22 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ t_vec			sphere_get_nor(t_data_sphere *data, t_vec origin, t_vec u_dir, double t)
 
 t_shade			sphere_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_vec origin)
 {
-	t_vec			al;
 	t_vec			nor;
 	t_vec			u_dir;
 	t_shade			ret;

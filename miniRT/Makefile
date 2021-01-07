@@ -6,7 +6,7 @@
 #    By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/03 21:49:15 by honlee            #+#    #+#              #
-#    Updated: 2021/01/06 18:59:35 by honlee           ###   ########seoul.kr   #
+#    Updated: 2021/01/06 19:57:29 by honlee           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,10 @@ SRCNAME		=		\
 					shade_util1.c\
 					get_next_line.c\
 					get_next_line_utils.c\
-					ft_split.c
+					ft_split.c\
+					ft_atod.c\
+					error_util1.c\
+					parse_util1.c
 SRCS		=		${addprefix ${SRCDIR}, ${SRCNAME}}
 INCDIR		=		./includes/
 CC			=		clang
