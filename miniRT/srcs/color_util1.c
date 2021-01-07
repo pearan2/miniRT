@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 01:28:54 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/06 02:13:20 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/06 18:48:06 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ int				color_col_to_int(t_color col)
 	return (ret);
 }
 
-t_color			color_scala_multi(t_color a, double t)
+t_color			color_scala_multi(t_color a, double t, t_color clamp)
 {
 	t_color				ret;
 
-	ret.r = fmin(a.r, a.r * t);
-	ret.b = fmin(a.b, a.b * t);
-	ret.g = fmin(a.g, a.g * t);
+	ret.r = fmin(clamp.r, a.r * t);
+	ret.b = fmin(clamp.b, a.b * t);
+	ret.g = fmin(clamp.g, a.g * t);
 	return (ret);
 }
 

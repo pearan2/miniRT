@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 21:37:36 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/06 04:44:47 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/06 18:48:01 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int		main()
 	void		*mlx_win;
 	t_map_info	map;
 	
-
-
 	//map setting
 	//image
 	map.apsect_ratio = 16.0 / 9.0;
@@ -49,19 +47,22 @@ int		main()
 	t_data_sphere *sp0 = malloc(sizeof(t_data_sphere));
 	sp0->center = vec_init(0, -0.5, 5);
 	sp0->radius = 0.5;
-	sp0->color = color_init(1, 0, 0);
+	sp0->diff_color = color_init(1, 0, 0);
+	sp0->spec_color = color_init(1.0, 1.0, 1.0);
 
 	//obj[1] data
 	t_data_sphere *sp1 = malloc(sizeof(t_data_sphere));
 	sp1->center = vec_init(0, -101, 5);
 	sp1->radius = 100;
-	sp1->color = color_init(0.1, 0.9, 0.1);
+	sp1->diff_color = color_init(0.1, 0.9, 0.1);
+	sp1->spec_color = color_init(1.0, 1.0, 1.0);
 
 	t_data_sphere *sp2 = malloc(sizeof(t_data_sphere));
 	sp2->center = vec_init(1.05, -0.5, 5);
 	sp2->radius = 0.5;
-	sp2->color = color_init(0 ,0 ,1);
-
+	sp2->diff_color = color_init(0 ,0 ,1);
+	sp2->spec_color = color_init(1.0, 1.0, 1.0);
+	
 	map.objs[0] = malloc(sizeof(t_obj));
 	map.objs[0]->type = sphere;
 	map.objs[0]->data = sp0;
@@ -80,11 +81,13 @@ int		main()
 	map.lights[0]->color = color_init(1,1,1);
 	map.lights[0]->center = vec_init(-5, 5, 5);
 	map.lights[0]->lux = 1;
+	map.lights[0]->spec_n = 50.0;
 
 	map.lights[1] = malloc(sizeof(t_light));
 	map.lights[1]->color = color_init(1, 1, 1);
 	map.lights[1]->center = vec_init(5, 5, 5);
 	map.lights[1]->lux = 1;
+	map.lights[1]->spec_n = 50.0;
 
 	//Render (make image)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
@@ -104,9 +107,9 @@ int		main()
 			t_vec unit_dir = vec_to_unit(dir);
 			
 			double t = 0.5 * (unit_dir.y + 1.0);
-			t_color pixel_color = color_scala_multi(color_init(1.0, 1.0, 1.0), (1.0 - t));
-			t_color pixel_color2 = color_scala_multi(color_init(0.5, 0.7, 1.0), t);
-			pixel_color = color_plus(pixel_color, pixel_color2);
+			t_color pixel_color = color_scala_multi(color_init(1.0, 1.0, 1.0), (1.0 - t), color_init(1.0, 1.0, 1.0));
+			t_color pixel_color2 = color_scala_multi(color_init(0.5, 0.7, 1.0), t, color_init(0.5, 0.7, 1.0));
+			pixel_color = color_plus(pixel_color, pixel_color2, color_init(1.0, 1.0, 1.0));
 			//end of gradation
 
 			size_t	idx = 0;
@@ -129,30 +132,23 @@ int		main()
 			if (t_max != DBL_MAX)
 			{
 				idx = 0;
-				double t = 0;
+				t_shade shader = shade_init(0, 0, 0);
 				t_vec ori = ray_at(map.origin, unit_dir, t_max);
 				while (idx < map.lights_num)
 				{
-					t += sphere_get_colt(&map, hit_idx, idx, ori);
+					shader = shade_plus(shader, sphere_get_colt(&map, hit_idx, idx, ori));
 					idx++;
 				}
-				pixel_color = ((t_data_sphere *)map.objs[hit_idx]->data)->color;
-				pixel_color = color_scala_multi(pixel_color, t);
+				t_color diff_color = ((t_data_sphere *)map.objs[hit_idx]->data)->diff_color;
+				t_color spec_color = ((t_data_sphere *)map.objs[hit_idx]->data)->spec_color;
+				pixel_color = color_scala_multi(diff_color, shader.diff_ratio, diff_color);
+				pixel_color2 = color_scala_multi(spec_color, shader.spec_ratio, color_init(1.0, 1.0, 1.0));
+				pixel_color = color_plus(pixel_color, pixel_color2, color_init(1.0, 1.0, 1.0));
 			}
 			//draw
 			ft_mlx_pixel_put(&img, i, map.image_height - j, pixel_color);
-			// if (i % 50 == 0 && j % 50 == 0)
-			// {
-			// 	printf("%d, %d\n", i, j);
-			// 	printf("%f\n", unit_dir.x);
-			// 	printf("%f\n", unit_dir.y);
-			// 	printf("%f\n", unit_dir.z);
-			// 	printf("-----------------------\n");
-			// }
 		}
 	}
-	
-	//put image
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);	
 }

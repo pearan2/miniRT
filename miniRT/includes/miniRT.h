@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 22:35:51 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/06 04:40:11 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/06 18:48:03 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ typedef struct          s_vec
     double              z;
 }                       t_vec;
 
+typedef struct			s_shade
+{
+	double				diff_ratio;
+	double				spec_ratio;
+	double				som_ratio;
+}						t_shade;
+
 typedef enum			e_obj_type
 {
 	sphere
@@ -57,7 +64,9 @@ typedef struct			s_data_sphere
 {
 	t_vec				center;
 	double				radius;
-	t_color				color;
+	t_color				diff_color;
+	t_color				spec_color;
+	t_color				ambi_color;
 }						t_data_sphere;
 
 typedef struct			s_light
@@ -65,9 +74,9 @@ typedef struct			s_light
 	t_vec				center;
 	double				lux;
 	t_color				color;
-	double				kd;
+	double				ratio;
+	double				spec_n;
 }						t_light;
-
 
 typedef struct			s_map_info
 {
@@ -83,6 +92,7 @@ typedef struct			s_map_info
 	t_vec				lower_left_corner;
 	t_obj				**objs;
 	t_light				**lights;
+	t_light				ambient;
 	size_t				objs_num;
 	size_t				lights_num;
 }						t_map_info;
@@ -100,13 +110,15 @@ t_vec				vec_scala_multi(t_vec a, double t);
 t_color				color_int_to_col(int r, int g, int b);
 t_color				color_dbl_to_col(double r, double g, double b);
 int					color_col_to_int(t_color col);
-t_color				color_scala_multi(t_color a, double t);
+t_color				color_scala_multi(t_color a, double t, t_color clamp);
 t_color				color_init(double r, double g, double b);
-t_color				color_plus(t_color a, t_color b);
+t_color				color_plus(t_color a, t_color b, t_color clamp);
 double				sphere_hit(void *data, t_vec origin, t_vec dir);
 t_vec				sphere_get_nor(t_data_sphere *data, t_vec origin, t_vec u_dir, double t);
 t_vec				ray_at(t_vec origin, t_vec u_dir, double t);
-double				sphere_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_vec origin);
+t_shade				sphere_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_vec origin);
 double				ray_is_block(t_map_info *map, size_t obj_idx, t_vec origin, t_vec u_dir);
+t_shade				shade_init(double a, double b, double c);
+t_shade				shade_plus(t_shade a, t_shade b);
 
 #endif

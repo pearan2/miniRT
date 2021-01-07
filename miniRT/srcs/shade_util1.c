@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_util2.c                                      :+:      :+:    :+:   */
+/*   shade_util1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/04 02:41:12 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/06 18:48:03 by honlee           ###   ########seoul.kr  */
+/*   Created: 2021/01/06 18:00:42 by honlee            #+#    #+#             */
+/*   Updated: 2021/01/06 18:48:05 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_color				color_plus(t_color a, t_color b, t_color clamp)
+t_shade				shade_init(double a, double b, double c)
 {
-	t_color				ret;
+	t_shade			ret;
 
-	ret.r = fmin(clamp.r, a.r + b.r);
-	ret.g = fmin(clamp.g, a.g + b.g);
-	ret.b = fmin(clamp.b, a.b + b.b);
+	ret.diff_ratio = a;
+	ret.spec_ratio = b;
+	ret.som_ratio = c;
+	return (ret);
+}
+
+t_shade				shade_plus(t_shade a, t_shade b)
+{
+	t_shade			ret;
+	ret.diff_ratio = a.diff_ratio + b.diff_ratio;
+	ret.spec_ratio = a.spec_ratio + b.spec_ratio;
+	ret.som_ratio = a.som_ratio + b.som_ratio;
 	return (ret);
 }

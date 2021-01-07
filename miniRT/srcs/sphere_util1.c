@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 03:45:47 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/06 04:41:06 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/06 18:48:04 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,25 @@ t_vec			sphere_get_nor(t_data_sphere *data, t_vec origin, t_vec u_dir, double t)
 	return (ret);
 }
 
-double			sphere_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_vec origin)
+t_shade			sphere_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_vec origin)
 {
 	t_vec			al;
 	t_vec			nor;
 	t_vec			u_dir;
+	t_shade			ret;
+	t_vec			h;
 
+	ret = shade_init(0, 0, 0);
 	u_dir = vec_minus(map->lights[lig_idx]->center, origin);
 	u_dir = vec_to_unit(u_dir);
 	t_vec center = ((t_data_sphere *)map->objs[obj_idx]->data)->center;
 	nor = vec_minus(origin, center);
 	nor = vec_to_unit(nor);
 	if (ray_is_block(map, obj_idx, origin, u_dir) != -1.0)
-		return (0);
-	return (fmax(0, vec_dot(u_dir, nor)));
+		return (ret);
+	ret.diff_ratio = fmax(0, vec_dot(u_dir, nor));
+	h = vec_to_unit(vec_minus(map->origin, origin));
+	h = vec_to_unit(vec_plus(u_dir, h));
+	ret.spec_ratio = pow(fmax(0,vec_dot(h, nor)), map->lights[lig_idx]->spec_n);
+	return (ret);
 }
