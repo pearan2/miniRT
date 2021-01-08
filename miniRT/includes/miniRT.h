@@ -6,13 +6,14 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 22:35:51 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/07 04:25:52 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/08 02:04:34 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
+# include <stdio.h>
 # include <mlx.h>
 # include <math.h>
 # include <stdlib.h>
@@ -89,9 +90,16 @@ typedef struct			s_light
 	double				spec_n;
 }						t_light;
 
+typedef struct			s_ro_ras
+{
+	double				ras_x;
+	double				ras_y;
+	double				ras_z;
+}						t_ro_ras;
+
 typedef struct			s_map_info
 {
-	double				apsect_ratio;
+	double				aspect_ratio;
 	int					image_width;
 	int					image_height;
 	t_vec				orient;
@@ -102,10 +110,14 @@ typedef struct			s_map_info
 	t_vec				origin;
 	t_vec				horizontal;
 	t_vec				vertical;
-	t_vec				lower_left_corner;
+	t_vec				p_ll;
+	t_vec				p_hl;
+	t_vec				p_lr;
+	t_vec				p_c;
 	t_obj				**objs;
 	t_light				**lights;
 	t_light				ambient;
+	t_ro_ras			rotate_info;
 	size_t				objs_num;
 	size_t				lights_num;
 	size_t				l_iter;
@@ -160,5 +172,10 @@ int					parse_mapper(t_map_info *map, char **splited);
 void				map_free(t_map_info *map);
 double				ft_to_radian(double input);
 double				ft_to_degree(double input);
+void				rotate_by_unit(t_map_info *map);
+t_vec				rotate_by_x(t_vec origin, double theta_base_x);
+t_vec				rotate_by_y(t_vec origin, double theta_base_y);
+t_vec				rotate_by_z(t_vec origin, double theta_base_z);
+void				make_view_plane(t_map_info *map);
 
 #endif
