@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_save.c                                        :+:      :+:    :+:   */
+/*   main.c__                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 21:37:36 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/08 04:37:10 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/08 05:16:30 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		main()
 	//Camera	
 	map.viewport_height = 2.0;
 	map.viewport_width = map.aspect_ratio * map.viewport_height;
-	map.focal_length = 3;
+	map.focal_length = 2.53;
 
 	map.origin = vec_init(0, 0, 0);
 	map.horizontal = vec_init(map.viewport_width, 0, 0);
@@ -90,7 +90,7 @@ int		main()
 	//Render (make image)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	//ft_mlx_pixel_put(&img, i, image_height - j, ft_rgb_to_int(ir, ig, ib));
-	for (int j = map.image_height; j>=0; j--)
+	for (int j = 0; j<map.image_height; j++)
 	{
 		for (int i = 0; i<map.image_width; i++)
 		{

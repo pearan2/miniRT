@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 22:35:51 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/08 02:04:34 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/08 05:03:22 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,5 +177,7 @@ t_vec				rotate_by_x(t_vec origin, double theta_base_x);
 t_vec				rotate_by_y(t_vec origin, double theta_base_y);
 t_vec				rotate_by_z(t_vec origin, double theta_base_z);
 void				make_view_plane(t_map_info *map);
+void				*hit_func_mapper(t_map_info *map, size_t idx);
+t_color				get_hit_col(t_map_info *map, t_vec unit_dir, double t_max, size_t hit_idx);
 
 #endif

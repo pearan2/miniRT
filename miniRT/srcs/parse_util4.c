@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 23:19:15 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/07 04:25:51 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/08 04:40:43 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int				parse_light(t_map_info *m, char **splited)
 	if (!ft_is_double(splited[2]))
 		return (ft_free(t, -1));
 	t->ratio = ft_atod(splited[2]);
+	t->spec_n = 50.0;
 	if (t->ratio < 0.0 || t->ratio > 1.0)
 		return (ft_free(t, -1));
 	m->lights[m->l_iter] = t;
@@ -49,6 +50,7 @@ int				parse_sphere(t_map_info *m, char **splited)
 	t->radius = ft_atod(splited[2]) / 2;
 	if (!(m->objs[m->o_iter] = malloc(sizeof(t_obj))))
 		return (ft_free(t, -1));
+	t->spec_color = color_init(1.0, 1.0, 1.0);
 	m->objs[m->o_iter]->type = sphere;
 	m->objs[m->o_iter]->data = t;
 	m->o_iter++;
