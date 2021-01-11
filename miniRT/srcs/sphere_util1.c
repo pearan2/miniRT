@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 03:45:47 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/08 04:31:41 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/10 22:05:57 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,19 @@ t_shade			sphere_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_ve
 	t_vec			u_dir;
 	t_shade			ret;
 	t_vec			h;
+	double			t;
 
 	ret = shade_init(0, 0, 0);
 	u_dir = vec_minus(map->lights[lig_idx]->center, origin);
 	u_dir = vec_to_unit(u_dir);
+	t = ((map->lights[lig_idx]->center.x) - origin.x) / (u_dir.x);
 	t_vec center = ((t_data_sphere *)map->objs[obj_idx]->data)->center;
 	nor = vec_minus(origin, center);
 	nor = vec_to_unit(nor);
-	if (ray_is_block(map, obj_idx, origin, u_dir) != -1.0)
+	if (ray_is_block(map, obj_idx, origin, u_dir) != -1.0 &&
+			ray_is_block(map, obj_idx, origin, u_dir) < t)
 		return (ret);
-	ret.diff_ratio = fmax(0, vec_dot(u_dir, nor));
+	ret.diff_ratio = map->lights[lig_idx]->ratio * fmax(0, vec_dot(u_dir, nor));
 	h = vec_to_unit(vec_minus(map->origin, origin));
 	h = vec_to_unit(vec_plus(u_dir, h));
 	ret.spec_ratio = pow(fmax(0,vec_dot(h, nor)), map->lights[lig_idx]->spec_n);

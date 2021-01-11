@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 19:03:33 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/08 05:17:45 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/11 01:03:37 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,24 @@ t_color			do_loop(t_map_info *map, double u, double v, size_t hit_idx)
 
 int					start_world(t_map_info *map, int i, int j)
 {
-	void		*mlx;
+	t_wins		wins;
 	t_data		img;
-	void		*mlx_win;
 	t_color		pixel_color;
 
-	mlx = mlx_init();	
-	mlx_win = mlx_new_window(mlx, map->image_width, map->image_height, "Hello 42 Seoul!");
-	img.img = mlx_new_image(mlx, map->image_width, map->image_height);
+	wins.mlx = mlx_init();
+	wins.win = mlx_new_window(wins.mlx, map->image_width, map->image_height, "miniRT");
+	wins.img = &img;
+	wins.map = map;
+	img.img = mlx_new_image(wins.mlx, map->image_width, map->image_height);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	while (++j < map->image_height)
-	{
-		i = -1;
-		while (++i < map->image_width)
-		{
-			pixel_color = do_loop(map, (double)i / (double)map->image_width
-						,(double)j / (double)map->image_height, 0);
-			ft_mlx_pixel_put(&img, i, map->image_height - j, pixel_color);
-		}
-	}
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+	draw_image(&wins, i, j);
+
+	mlx_hook(wins.win, 2, 1L<<0, &key_press, &wins);
+	//in linux
+	mlx_hook(wins.win, 33, 1L<<17, &mouse_exit, &wins);
+	//in mac
+	//mlx_hook(wins.win, 17, 0, &mouse_exit, &wins);
+	mlx_loop(wins.mlx);
 	map_free(map);
 	return (1);
 }
@@ -92,9 +89,9 @@ int					map_checker(t_map_info *map, int opt)
 	map->p_ll = vec_init(-map->viewport_width / 2, -map->viewport_height / 2, map->focal_length);
 	map->p_hl = vec_init(-map->viewport_width / 2, map->viewport_height / 2, map->focal_length);
 	map->p_lr = vec_init(map->viewport_width / 2, -map->viewport_height / 2, map->focal_length);
+	make_view_plane(map);
 	map->vertical = vec_minus(map->p_hl, map->p_ll);
 	map->horizontal = vec_minus(map->p_lr, map->p_ll);	
-	make_view_plane(map);
 	if (opt == 0)
 		return (start_world(map, -1, -1));
 	return (start_make_bmp(map));

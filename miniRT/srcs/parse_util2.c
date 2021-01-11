@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 22:36:21 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/07 04:25:50 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/10 17:34:35 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,7 @@ int				parse_mapper(t_map_info *map, char **splited)
 		return (parse_light(map, splited));
 	else if (splited[0][0] == 's' && splited[0][1] == 'p')
 		return (parse_sphere(map, splited));
+	else if (splited[0][0] == 'p' && splited[0][1] == 'l')
+		return (parse_plane(map, splited));
 	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 23:19:15 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/08 04:40:43 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/10 18:45:01 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,29 @@ int				parse_sphere(t_map_info *m, char **splited)
 		return (ft_free(t, -1));
 	t->spec_color = color_init(1.0, 1.0, 1.0);
 	m->objs[m->o_iter]->type = sphere;
+	m->objs[m->o_iter]->data = t;
+	m->o_iter++;
+	return (0);
+}
+
+int				parse_plane(t_map_info *m, char **splited)
+{
+	t_data_plane		*t;
+	if (parse_spl_len(splited) != 4)
+		return (-1);
+	if (!(t = malloc(sizeof(t_data_plane))))
+		return (-1);
+	if (parse_vec(ft_split(splited[1], ","), &(t->center)) == -1)
+		return (ft_free(t, -1));
+	if (parse_vec(ft_split(splited[2], ","), &(t->nor)) == -1)
+		return (ft_free(t, -1));
+	if (parse_color(ft_split(splited[3], ","), &(t->diff_color)) == -1)
+		return (ft_free(t, -1));
+	if (!(m->objs[m->o_iter] = malloc(sizeof(t_obj))))
+		return (ft_free(t, -1));
+	t->spec_color = color_init(1.0, 1.0, 1.0);
+	t->nor = vec_to_unit(t->nor);
+	m->objs[m->o_iter]->type = plane;
 	m->objs[m->o_iter]->data = t;
 	m->o_iter++;
 	return (0);

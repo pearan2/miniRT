@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 22:35:51 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/08 05:03:22 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/11 03:14:47 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,28 @@ typedef struct			s_data_sphere
 	t_color				ambi_color;
 }						t_data_sphere;
 
+typedef struct			s_data_plane
+{
+	t_vec				center;
+	t_vec				nor;
+	t_color				diff_color;
+	t_color				spec_color;
+	t_color				ambi_color;
+}						t_data_plane;
+
+typedef struct			s_data_square
+{
+	t_vec				ll;
+	t_vec				lr;
+	t_vec				hl;
+	t_vec				vertical;
+	t_vec				horizontal;
+	t_vec				nor;
+	t_vec				center;
+	double				side_len;
+}						t_data_square;
+
+
 typedef struct			s_light
 {
 	t_vec				center;
@@ -107,6 +129,7 @@ typedef struct			s_map_info
 	double				viewport_width;
 	double				focal_length;
 	double				fov_horizontal;
+	double				t;
 	t_vec				origin;
 	t_vec				horizontal;
 	t_vec				vertical;
@@ -126,6 +149,14 @@ typedef struct			s_map_info
 	size_t				c_cnt;
 	size_t				a_cnt;
 }						t_map_info;
+
+typedef struct			s_wins
+{
+	void				*mlx;
+	void				*win;
+	t_data				*img;
+	t_map_info			*map;
+}						t_wins;
 
 int					get_next_line(int fd, char **line);
 char				**ft_split(char *str, char *charset);
@@ -179,5 +210,13 @@ t_vec				rotate_by_z(t_vec origin, double theta_base_z);
 void				make_view_plane(t_map_info *map);
 void				*hit_func_mapper(t_map_info *map, size_t idx);
 t_color				get_hit_col(t_map_info *map, t_vec unit_dir, double t_max, size_t hit_idx);
+void				*col_func_mapper(t_map_info *map, size_t idx);
+int					parse_plane(t_map_info *m, char **splited);
+double				plane_hit(void *data, t_vec origin, t_vec u_dir);
+t_shade				plane_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_vec origin);
+int					key_press(int keycode, t_wins *map);
+int					mouse_exit(t_wins *wins);
+t_color				do_loop(t_map_info *map, double u, double v, size_t hit_idx);
+void				draw_image(t_wins *wins, int i, int j);
 
 #endif
