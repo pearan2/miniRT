@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 22:35:51 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/11 03:14:47 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/11 19:30:26 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,11 @@ typedef struct			s_data_square
 	t_vec				horizontal;
 	t_vec				nor;
 	t_vec				center;
+	t_color				diff_color;
+	t_color				ambi_color;
+	t_color				spec_color;
 	double				side_len;
 }						t_data_square;
-
 
 typedef struct			s_light
 {
@@ -218,5 +220,9 @@ int					key_press(int keycode, t_wins *map);
 int					mouse_exit(t_wins *wins);
 t_color				do_loop(t_map_info *map, double u, double v, size_t hit_idx);
 void				draw_image(t_wins *wins, int i, int j);
+void				square_make_data(t_data_square *data);
+int					parse_square(t_map_info *m, char **splited);
+double				square_hit(void *data, t_vec origin, t_vec u_dir);
+t_shade				square_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_vec origin);
 
 #endif

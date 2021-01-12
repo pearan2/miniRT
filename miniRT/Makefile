@@ -6,7 +6,7 @@
 #    By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/03 21:49:15 by honlee            #+#    #+#              #
-#    Updated: 2021/01/10 22:52:29 by honlee           ###   ########seoul.kr   #
+#    Updated: 2021/01/11 19:21:30 by honlee           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ SRCNAME		=		\
 					parse_util4.c\
 					rotate_util1.c\
 					plane_util1.c\
-					event_util1.c
+					event_util1.c\
+					square_util1.c
 SRCS		=		${addprefix ${SRCDIR}, ${SRCNAME}}
 INCDIR		=		./includes/
 CC			=		clang

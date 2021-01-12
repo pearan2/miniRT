@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 22:48:10 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/11 01:00:43 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/11 19:26:20 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int					key_press(int keycode, t_wins *wins)
 {
+	keycode = 0;
 	mlx_clear_window(wins->mlx, wins->win);
 	wins->map->origin = vec_plus(wins->map->origin, vec_scala_multi(wins->map->orient, 0.05));
 	wins->map->p_ll = vec_plus(wins->map->p_ll, vec_scala_multi(wins->map->orient, 0.05));

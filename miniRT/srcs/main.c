@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 19:03:33 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/11 01:03:37 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/11 19:26:09 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int					start_world(t_map_info *map, int i, int j)
 {
 	t_wins		wins;
 	t_data		img;
-	t_color		pixel_color;
 
 	wins.mlx = mlx_init();
 	wins.win = mlx_new_window(wins.mlx, map->image_width, map->image_height, "miniRT");

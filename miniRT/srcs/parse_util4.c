@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 23:19:15 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/10 18:45:01 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/11 19:24:02 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,34 @@ int				parse_plane(t_map_info *m, char **splited)
 	t->spec_color = color_init(1.0, 1.0, 1.0);
 	t->nor = vec_to_unit(t->nor);
 	m->objs[m->o_iter]->type = plane;
+	m->objs[m->o_iter]->data = t;
+	m->o_iter++;
+	return (0);
+}
+
+int				parse_square(t_map_info *m, char **splited)
+{
+	t_data_square			*t;
+	
+	if (parse_spl_len(splited) != 5)
+		return (-1);
+	if (!(t = malloc(sizeof(t_data_square))))
+		return (-1);
+	if (parse_vec(ft_split(splited[1], ","), &(t->center)) == -1)
+		return (ft_free(t, -1));
+	if (parse_vec(ft_split(splited[2], ","), &(t->nor)) == -1)
+		return (ft_free(t, -1));
+	if (!ft_is_double(splited[3]))
+		return (ft_free(t, -1));
+	t->side_len = ft_atod(splited[3]);
+	if (parse_color(ft_split(splited[4], ","), &(t->diff_color)) == -1)
+		return (ft_free(t, -1));
+	if (!(m->objs[m->o_iter] = malloc(sizeof(t_obj))))
+		return (ft_free(t, -1));
+	t->spec_color = color_init(1.0, 1.0, 1.0);
+	t->nor = vec_to_unit(t->nor);
+	square_make_data(t);
+	m->objs[m->o_iter]->type = square;
 	m->objs[m->o_iter]->data = t;
 	m->o_iter++;
 	return (0);
