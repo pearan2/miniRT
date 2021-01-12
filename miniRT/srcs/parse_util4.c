@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 23:19:15 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/11 19:24:02 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/11 21:39:04 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int				parse_sphere(t_map_info *m, char **splited)
 		return (ft_free(t, -1));
 	if (!ft_is_double(splited[2]))
 		return (ft_free(t, -1));
-	t->radius = ft_atod(splited[2]) / 2;
+	t->radius = fabs(ft_atod(splited[2]) / 2);
 	if (!(m->objs[m->o_iter] = malloc(sizeof(t_obj))))
 		return (ft_free(t, -1));
 	t->spec_color = color_init(1.0, 1.0, 1.0);
@@ -94,7 +94,7 @@ int				parse_square(t_map_info *m, char **splited)
 		return (ft_free(t, -1));
 	if (!ft_is_double(splited[3]))
 		return (ft_free(t, -1));
-	t->side_len = ft_atod(splited[3]);
+	t->side_len = fabs(ft_atod(splited[3]));
 	if (parse_color(ft_split(splited[4], ","), &(t->diff_color)) == -1)
 		return (ft_free(t, -1));
 	if (!(m->objs[m->o_iter] = malloc(sizeof(t_obj))))

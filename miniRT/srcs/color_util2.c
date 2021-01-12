@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 02:41:12 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/10 22:44:03 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/11 20:06:26 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_color				get_diff_col(t_map_info *map, size_t idx)
 		return (((t_data_sphere *)map->objs[idx]->data)->diff_color);
 	else if (map->objs[idx]->type == plane)
 		return (((t_data_plane *)map->objs[idx]->data)->diff_color);
+	else if (map->objs[idx]->type == square)
+		return (((t_data_square *)map->objs[idx]->data)->diff_color);
 	else
 		return (color_init(0, 0, 0));
 }
@@ -38,6 +40,8 @@ t_color				get_spec_col(t_map_info *map, size_t idx)
 		return (((t_data_sphere *)map->objs[idx]->data)->spec_color);
 	else if (map->objs[idx]->type == plane)
 		return (((t_data_plane *)map->objs[idx]->data)->spec_color);
+	else if (map->objs[idx]->type == square)
+		return (((t_data_square *)map->objs[idx]->data)->spec_color);
 	else
 		return (color_init(0, 0, 0));
 }

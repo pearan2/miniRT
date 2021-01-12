@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 18:56:12 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/11 19:49:24 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/11 21:31:10 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void				square_make_data(t_data_square *data)
 	data->hl = vec_init(-data->side_len/2, data->side_len/2, 1);
 	data->lr = vec_init(data->side_len/2, -data->side_len/2, 1);
 	idx = 0;
-	while (++idx < 100)
+	while (++idx < 30)
 		square_rotate(data);
 	diff = vec_minus(center, data->center);
 	data->center = vec_plus(data->center, diff);
@@ -76,11 +76,10 @@ double			square_hit(void *data, t_vec origin, t_vec u_dir)
 		return (-1.0);
 	lp = vec_plus(origin, vec_scala_multi(u_dir, t));
 	lp = vec_minus(lp, ((t_data_square *)data)->ll);
-	if (fabs(vec_dot(lp, hori)) > vec_length(hori))
-		return (-1.0);
-	if (fabs(vec_dot(lp, ver)) > vec_length(ver))
-		return (-1.0);
-	return (t);
+	if (vec_dot(lp, vec_to_unit(hori)) <= vec_length(hori) && vec_dot(lp, hori) >= 0
+		&& vec_dot(lp, vec_to_unit(ver)) <= vec_length(ver) && vec_dot(lp, ver) >= 0)
+		return (t);
+	return (-1.0);
 }
 
 t_shade			square_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_vec origin)
