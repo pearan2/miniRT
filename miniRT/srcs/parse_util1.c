@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 19:21:36 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/12 18:10:28 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/12 23:29:44 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int				parse_what_type(char **splited, size_t *nl, size_t *no)
 	else if (splited[0][0] == 's' && splited[0][1] == 'q')
 		(*no)++;
 	else if (splited[0][0] == 'c' && splited[0][1] == 'y')
-		(*no)++;
+		(*no) = (*no) + 3;
 	else if (splited[0][0] == 't' && splited[0][1] == 'r')
 		(*no)++;
 	return (0);

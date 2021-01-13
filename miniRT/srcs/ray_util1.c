@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 01:47:28 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/11 19:47:36 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/13 04:44:51 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@ void			*hit_func_mapper(t_map_info *map, size_t idx)
 		return (&plane_hit);
 	else if (map->objs[idx]->type == square)
 		return (&square_hit);
+	else if (map->objs[idx]->type == cylinder)
+		return (&cylinder_hit);
+	else if (map->objs[idx]->type == disk)
+		return (&disk_hit);
 	else
 		return (0);
 }
@@ -37,6 +41,10 @@ void			*col_func_mapper(t_map_info *map, size_t idx)
 		return (&plane_get_colt);
 	else if (map->objs[idx]->type == square)
 		return (&square_get_colt);
+	else if (map->objs[idx]->type == cylinder)
+		return (&cylinder_get_colt);
+	else if (map->objs[idx]->type == disk)
+		return (&disk_get_colt);
 	else
 		return (0);
 }

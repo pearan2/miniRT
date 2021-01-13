@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 22:35:51 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/12 18:40:42 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/12 22:36:44 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ typedef enum			e_obj_type
 	triangle,
 	cylinder,
 	square,
-	plane
+	plane,
+	disk
 }						t_obj_type;
 
 typedef struct			s_obj
@@ -243,5 +244,12 @@ void				square_make_data(t_data_square *data);
 int					parse_square(t_map_info *m, char **splited);
 double				square_hit(void *data, t_vec origin, t_vec u_dir);
 t_shade				square_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_vec origin);
+int					parse_cylinder(t_map_info *m, char **splited);
+int					parse_disk(t_map_info *m, t_data_cylinder *t);
+int					ft_free2(void *target, void *target2, int ret);
+double				disk_hit(void *data, t_vec origin, t_vec u_dir);
+t_shade				disk_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_vec origin);
+double				cylinder_hit(void *data, t_vec origin, t_vec u_dir);
+t_shade				cylinder_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_vec origin);
 
 #endif

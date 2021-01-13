@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 19:16:10 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/07 00:12:23 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/12 22:15:15 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,13 @@ int				ft_puterror(int opt)
 int				ft_close(int fd, int ret)
 {
 	close(fd);
+	return (ret);
+}
+
+int				ft_free2(void *target, void *target2, int ret)
+{
+	free(target);
+	free(target2);
 	return (ret);
 }
 

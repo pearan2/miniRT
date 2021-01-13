@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 22:36:21 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/11 19:28:30 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/12 23:14:04 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int				parse_mapper(t_map_info *map, char **splited)
 		return (parse_resol(map, splited));
 	else if (splited[0][0] == 'A')
 		return (parse_amb(map, splited));
+	else if (splited[0][0] == 'c' && splited[0][1] == 'y')
+		return (parse_cylinder(map, splited));
 	else if (splited[0][0] == 'c')
 		return (parse_cam(map, splited));
 	else if (splited[0][0] == 'l')
