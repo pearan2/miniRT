@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 22:35:51 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/11 19:30:26 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/12 18:40:42 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,25 @@ typedef struct			s_data_square
 	t_color				spec_color;
 	double				side_len;
 }						t_data_square;
+
+typedef struct			s_data_disk
+{
+	t_vec				center;
+	t_vec				nor;
+	double				radius;
+	t_color				diff_color;
+	t_color				spec_color;
+}						t_data_disk;
+
+typedef struct			s_data_cylinder
+{
+	t_vec				center;
+	t_vec				nor;
+	double				height;
+	double				radius;
+	t_color				diff_color;
+	t_color				spec_color;
+}						t_data_cylinder;
 
 typedef struct			s_light
 {

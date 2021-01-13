@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 23:19:15 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/11 21:39:04 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/12 18:44:33 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int				parse_light(t_map_info *m, char **splited)
 {
 	t_light		*t;
+
 	if (parse_spl_len(splited) != 4)
 		return (-1);
 	if (!(t = malloc(sizeof(t_light))))
@@ -37,6 +38,7 @@ int				parse_light(t_map_info *m, char **splited)
 int				parse_sphere(t_map_info *m, char **splited)
 {
 	t_data_sphere		*t;
+
 	if (parse_spl_len(splited) != 4)
 		return (-1);
 	if (!(t = malloc(sizeof(t_data_sphere))))
@@ -60,6 +62,7 @@ int				parse_sphere(t_map_info *m, char **splited)
 int				parse_plane(t_map_info *m, char **splited)
 {
 	t_data_plane		*t;
+
 	if (parse_spl_len(splited) != 4)
 		return (-1);
 	if (!(t = malloc(sizeof(t_data_plane))))
