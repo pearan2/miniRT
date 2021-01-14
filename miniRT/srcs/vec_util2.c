@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 22:53:19 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/04 04:10:49 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/13 20:08:39 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,15 @@ t_vec			vec_init(double x, double y, double z)
 	ret.x = x;
 	ret.y = y;
 	ret.z = z;
+	return (ret);
+}
+
+t_vec			vec_cross(t_vec a, t_vec b)
+{
+	t_vec				ret;
+
+	ret.x = a.y * b.z - a.z * b.y;
+	ret.y = a.z * b.x - a.x * b.z;
+	ret.z = a.x * b.y - a.y * b.x;
 	return (ret);
 }

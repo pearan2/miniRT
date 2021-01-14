@@ -6,7 +6,7 @@
 #    By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/03 21:49:15 by honlee            #+#    #+#              #
-#    Updated: 2021/01/12 23:10:44 by honlee           ###   ########seoul.kr   #
+#    Updated: 2021/01/14 01:16:23 by honlee           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,10 @@ SRCNAME		=		\
 					event_util1.c\
 					square_util1.c\
 					disk_util1.c\
-					cylinder_util1.c
+					cylinder_util1.c\
+					cylinder_util2.c\
+					tri_util1.c\
+					bmp_util1.c
 SRCS		=		${addprefix ${SRCDIR}, ${SRCNAME}}
 INCDIR		=		./includes/
 CC			=		clang

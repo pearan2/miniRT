@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 02:41:12 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/12 23:08:29 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/13 20:22:12 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ t_color				get_diff_col(t_map_info *map, size_t idx)
 		return (((t_data_disk *)map->objs[idx]->data)->diff_color);
 	else if (map->objs[idx]->type == cylinder)
 		return (((t_data_cylinder *)map->objs[idx]->data)->diff_color);
+	else if (map->objs[idx]->type == triangle)
+		return (((t_data_tri *)map->objs[idx]->data)->diff_color);
 	else
 		return (color_init(0, 0, 0));
 }
@@ -50,6 +52,8 @@ t_color				get_spec_col(t_map_info *map, size_t idx)
 		return (((t_data_disk *)map->objs[idx]->data)->spec_color);
 	else if (map->objs[idx]->type == cylinder)
 		return (((t_data_cylinder *)map->objs[idx]->data)->spec_color);
+	else if (map->objs[idx]->type == triangle)
+		return (((t_data_tri *)map->objs[idx]->data)->spec_color);
 	else
 		return (color_init(0, 0, 0));
 }

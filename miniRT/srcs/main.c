@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 19:03:33 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/13 05:08:32 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/14 01:14:33 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,39 @@ int					start_world(t_map_info *map, int i, int j)
 
 int					start_make_bmp(t_map_info *map)
 {
-	map = 0;
-	printf("make_bmp start!!\n");
+	int			fd;
+	t_bmfh		bmfh;
+	t_bmih		bmih;
+	int			j;
+	int			i;
+	t_color		pixel_color;
+	t_rgbt		rgbt;
+	int			total = 0;
+
+	fd = open("miniRT.bmp", O_WRONLY | O_CREAT, 0644);
+	if (fd == -1)
+		return (ft_puterror(1));
+	bmfh = bmp_get_file_header(map);
+	bmih = bmp_get_info_header(map);
+	write(fd, &bmfh, 14);
+	write(fd, &bmih, 40);
+	j = 0;
+	while (j < map->image_height)
+	{
+		i = 0;
+		while (i < map->image_width)
+		{
+			pixel_color = do_loop(map, (double)i / (double)map->image_width
+						,(double)j / (double)map->image_height, 0);
+			rgbt = bmp_get_rgbt_by_color(pixel_color);
+			write(fd, &rgbt, 3);
+			total++;
+			i++;
+		}
+		j++;
+	}
+	printf("total => %d\n", total);
+	close(fd);
 	return (1);
 }
 

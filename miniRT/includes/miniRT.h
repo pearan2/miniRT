@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 22:35:51 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/12 22:36:44 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/14 01:01:35 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,16 @@ typedef struct			s_data_cylinder
 	t_color				spec_color;
 }						t_data_cylinder;
 
+typedef struct			s_data_tri
+{
+	t_vec				p1;
+	t_vec				p2;
+	t_vec				p3;
+	t_vec				nor;
+	t_color				diff_color;
+	t_color				spec_color;
+}						t_data_tri;
+
 typedef struct			s_light
 {
 	t_vec				center;
@@ -179,6 +189,42 @@ typedef struct			s_wins
 	t_data				*img;
 	t_map_info			*map;
 }						t_wins;
+
+#pragma pack(push, 1)
+
+typedef struct			s_bmfh
+{
+	char				id1;
+	char				id2;
+    unsigned int		size;
+    unsigned short		reserved1;
+    unsigned short		reserved2;
+    unsigned int		offset;
+}						t_bmfh;
+
+typedef struct			s_bmih
+{
+    unsigned int		size;
+    int					width;
+    int					height;
+    unsigned short		planes;
+    unsigned short		bit_count;
+    unsigned int		compression;
+    unsigned int		bit_size;
+    int					x_pels_per_meter;
+    int					y_pels_per_meter;
+    unsigned int		color_used;
+    unsigned int		color_important;
+}						t_bmih;
+
+typedef struct			s_rgbt
+{
+	unsigned char		blue;
+	unsigned char		green;
+	unsigned char		red;
+}						t_rgbt;
+
+#pragma pack(pop)
 
 int					get_next_line(int fd, char **line);
 char				**ft_split(char *str, char *charset);
@@ -251,5 +297,15 @@ double				disk_hit(void *data, t_vec origin, t_vec u_dir);
 t_shade				disk_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_vec origin);
 double				cylinder_hit(void *data, t_vec origin, t_vec u_dir);
 t_shade				cylinder_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_vec origin);
+double				cylinder_hit_a(t_data_cylinder *data, t_vec origin, t_vec u_dir);
+double				cylinder_hit_b(t_data_cylinder *data, t_vec origin, t_vec u_dir);
+double				cylinder_hit_c(t_data_cylinder *data, t_vec origin, t_vec u_dir);
+t_vec				vec_cross(t_vec a, t_vec b);
+int					parse_tri(t_map_info *m, char **splited);
+double				tri_hit(void *data, t_vec origin, t_vec u_dir);
+t_shade				tri_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_vec origin);
+t_bmfh				bmp_get_file_header(t_map_info *m);
+t_bmih				bmp_get_info_header(t_map_info *m);
+t_rgbt				bmp_get_rgbt_by_color(t_color color);
 
 #endif

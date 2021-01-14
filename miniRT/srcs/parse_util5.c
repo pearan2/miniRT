@@ -6,7 +6,7 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:44:03 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/13 04:50:31 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/13 20:33:12 by honlee           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,49 @@ int				parse_disk(t_map_info *m, t_data_cylinder *t)
 		return (ft_free2(disk1, disk2, -1));
 	m->objs[m->o_iter]->type = disk;
 	m->objs[m->o_iter]->data = disk2;
+	m->o_iter++;
+	return (0);
+}
+
+int				parse_is_tri(t_data_tri *data)
+{
+	t_vec		p1p2;
+	t_vec		p1p3;
+
+	p1p2 = vec_to_unit(vec_minus(data->p2, data->p1));
+	p1p3 = vec_to_unit(vec_minus(data->p3, data->p1));
+	data->nor = vec_to_unit(vec_cross(p1p2, p1p3));
+	if (p1p2.x == p1p3.x && p1p2.y == p1p3.y && p1p2.z == p1p3.z)
+		return (0);
+	p1p3 = vec_scala_multi(p1p3, -1.0);
+	if (p1p2.x == p1p3.x && p1p2.y == p1p3.y && p1p2.z == p1p3.z)
+		return (0);
+	return (1);
+}
+
+int				parse_tri(t_map_info *m, char **splited)
+{
+	t_data_tri		*t;
+
+	if (parse_spl_len(splited) != 5)
+		return (-1);
+	if (!(t = malloc(sizeof(t_data_tri))))
+		return (-1);
+	if (parse_vec(ft_split(splited[1], ","), &(t->p1)) == -1)
+		return (ft_free(t, -1));
+	if (parse_vec(ft_split(splited[2], ","), &(t->p2)) == -1)
+		return (ft_free(t, -1));
+	if (parse_vec(ft_split(splited[3], ","), &(t->p3)) == -1)
+		return (ft_free(t, -1));
+	if (parse_color(ft_split(splited[4], ","), &(t->diff_color)) == -1)
+		return (ft_free(t, -1));
+	if (!(m->objs[m->o_iter] = malloc(sizeof(t_obj))))
+		return (ft_free(t, -1));
+	if (!parse_is_tri(t))
+		return (ft_free(t, -1));
+	t->spec_color = color_init(1.0, 1.0, 1.0);
+	m->objs[m->o_iter]->type = triangle;
+	m->objs[m->o_iter]->data = t;
 	m->o_iter++;
 	return (0);
 }
