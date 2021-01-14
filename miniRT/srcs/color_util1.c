@@ -6,15 +6,16 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 01:28:54 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/06 18:48:06 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/06 18:48:06 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "mini_rt.h"
 
 t_color			color_int_to_col(int r, int g, int b)
 {
 	t_color				ret;
+
 	ret.r = (double)r / (double)255;
 	ret.g = (double)g / (double)255;
 	ret.b = (double)b / (double)255;
@@ -24,6 +25,7 @@ t_color			color_int_to_col(int r, int g, int b)
 t_color			color_dbl_to_col(double r, double g, double b)
 {
 	t_color				ret;
+
 	ret.r = r;
 	ret.g = g;
 	ret.b = b;

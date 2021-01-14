@@ -6,11 +6,11 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:42:16 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/14 00:10:27 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/14 00:10:27 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "mini_rt.h"
 
 double			cylinder_hit_a(t_data_cylinder *data, t_vec origin, t_vec u_dir)
 {
@@ -23,7 +23,8 @@ double			cylinder_hit_a(t_data_cylinder *data, t_vec origin, t_vec u_dir)
 	return (vec_dot(ta, ta));
 }
 
-double			cylinder_hit_b(t_data_cylinder *data, t_vec origin, t_vec u_dir)	
+double			cylinder_hit_b(t_data_cylinder *data,
+									t_vec origin, t_vec u_dir)
 {
 	t_vec			ta;
 	t_vec			tb;

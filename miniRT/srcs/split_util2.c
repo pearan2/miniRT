@@ -6,11 +6,11 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 21:04:56 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/06 23:01:28 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/06 23:01:28 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "mini_rt.h"
 
 char			**ft_split_free(char **target, unsigned int idx)
 {

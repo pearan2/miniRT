@@ -6,11 +6,11 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 19:21:36 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/12 23:29:44 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/12 23:29:44 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "mini_rt.h"
 
 int				parse_what_type(char **splited, size_t *nl, size_t *no)
 {
@@ -46,7 +46,7 @@ int				parse_get_num(int fd, size_t *num_lights, size_t *num_objs)
 			parse_what_type(splited, num_lights, num_objs);
 		ft_split_free(splited, parse_spl_len(splited));
 		if (ret == 0)
-			break;
+			break ;
 	}
 	return (0);
 }
@@ -71,7 +71,7 @@ int				parse_map(t_map_info *map, int fd)
 		if (parser_ret == -1)
 			return (-1);
 		if (ret == 0)
-			break;
+			break ;
 	}
 	return (0);
 }

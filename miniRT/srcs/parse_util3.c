@@ -6,11 +6,11 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 22:57:50 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/07 04:25:51 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/07 04:25:51 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "mini_rt.h"
 
 int				parse_col_check(t_color col)
 {
@@ -34,7 +34,7 @@ int				parse_color(char **splited, t_color *col)
 	col->g = (double)ft_atoi(splited[1]) / (double)255;
 	col->b = (double)ft_atoi(splited[2]) / (double)255;
 	ft_split_free(splited, idx);
-	return (parse_col_check(*col));	
+	return (parse_col_check(*col));
 }
 
 int				parse_vec(char **splited, t_vec *vec)

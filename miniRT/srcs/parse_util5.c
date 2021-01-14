@@ -6,11 +6,11 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 18:44:03 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/13 20:33:12 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/13 20:33:12 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "mini_rt.h"
 
 int				parse_cylinder(t_map_info *m, char **splited)
 {

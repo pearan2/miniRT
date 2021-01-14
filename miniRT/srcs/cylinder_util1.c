@@ -6,11 +6,11 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 19:00:11 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/13 22:37:55 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/13 22:37:55 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "mini_rt.h"
 
 double			cylinder_hit(void *data, t_vec origin, t_vec u_dir)
 {
@@ -45,11 +45,11 @@ t_vec			cylinder_get_nor(t_data_cylinder *data, t_vec origin)
 	h = vec_dot(vec_minus(origin, data->center), data->nor);
 	ph = vec_plus(data->center, vec_scala_multi(data->nor, h));
 	ret = vec_minus(origin, ph);
-
 	return (ret);
 }
 
-t_shade			cylinder_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_vec origin)
+t_shade			cylinder_get_colt(t_map_info *map, size_t obj_idx,
+							size_t lig_idx, t_vec origin)
 {
 	t_shade			ret;
 	t_vec			u_dir;
@@ -67,6 +67,7 @@ t_shade			cylinder_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_
 	ret.diff_ratio = map->lights[lig_idx]->ratio * fmax(0, vec_dot(u_dir, nor));
 	h = vec_to_unit(vec_minus(map->origin, origin));
 	h = vec_to_unit(vec_plus(u_dir, h));
-	ret.spec_ratio = pow(fmax(0, vec_dot(h, nor)), map->lights[lig_idx]->spec_n);
+	ret.spec_ratio = pow(fmax(0, vec_dot(h, nor)),
+								map->lights[lig_idx]->spec_n);
 	return (ret);
 }

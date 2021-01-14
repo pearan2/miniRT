@@ -6,13 +6,13 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 19:03:33 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/14 01:14:33 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/14 03:42:13 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "mini_rt.h"
 
-t_color			do_loop(t_map_info *map, double u, double v, size_t hit_idx)
+t_color				do_loop(t_map_info *map, double u, double v, size_t hit_idx)
 {
 	t_vec		unit_dir;
 	double		t;
@@ -38,8 +38,7 @@ t_color			do_loop(t_map_info *map, double u, double v, size_t hit_idx)
 	}
 	if (t_max != DBL_MAX)
 		return (get_hit_col(map, unit_dir, t_max, hit_idx));
-	else
-		return (color_init(0.7, 0.7, 0.7));	
+	return (color_init(0.7, 0.7, 0.7));
 }
 
 int					start_world(t_map_info *map, int i, int j)
@@ -48,11 +47,13 @@ int					start_world(t_map_info *map, int i, int j)
 	t_data		img;
 
 	wins.mlx = mlx_init();
-	wins.win = mlx_new_window(wins.mlx, map->image_width, map->image_height, "miniRT");
+	wins.win = mlx_new_window(wins.mlx, map->image_width,
+					map->image_height, "miniRT");
 	wins.img = &img;
 	wins.map = map;
 	img.img = mlx_new_image(wins.mlx, map->image_width, map->image_height);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
+					&img.line_length, &img.endian);
 	draw_image(&wins, i, j);
 
 	mlx_hook(wins.win, 2, 1L<<0, &key_press, &wins);
@@ -65,16 +66,12 @@ int					start_world(t_map_info *map, int i, int j)
 	return (1);
 }
 
-int					start_make_bmp(t_map_info *map)
+int					start_make_bmp(t_map_info *map, int j, int i, t_color pc)
 {
 	int			fd;
 	t_bmfh		bmfh;
 	t_bmih		bmih;
-	int			j;
-	int			i;
-	t_color		pixel_color;
 	t_rgbt		rgbt;
-	int			total = 0;
 
 	fd = open("miniRT.bmp", O_WRONLY | O_CREAT, 0644);
 	if (fd == -1)
@@ -83,22 +80,17 @@ int					start_make_bmp(t_map_info *map)
 	bmih = bmp_get_info_header(map);
 	write(fd, &bmfh, 14);
 	write(fd, &bmih, 40);
-	j = 0;
-	while (j < map->image_height)
+	while (++j < map->image_height)
 	{
-		i = 0;
-		while (i < map->image_width)
+		i = -1;
+		while (++i < map->image_width)
 		{
-			pixel_color = do_loop(map, (double)i / (double)map->image_width
-						,(double)j / (double)map->image_height, 0);
-			rgbt = bmp_get_rgbt_by_color(pixel_color);
+			pc = do_loop(map, (double)i / (double)map->image_width,
+						(double)j / (double)map->image_height, 0);
+			rgbt = bmp_get_rgbt_by_color(pc);
 			write(fd, &rgbt, 3);
-			total++;
-			i++;
 		}
-		j++;
 	}
-	printf("total => %d\n", total);
 	close(fd);
 	return (1);
 }
@@ -116,15 +108,18 @@ int					map_checker(t_map_info *map, int opt)
 	map->viewport_width = map->aspect_ratio * map->viewport_height;
 	map->focal_length = map->aspect_ratio / tan(ft_to_radian(theta));
 	map->p_c = vec_init(0, 0, map->focal_length);
-	map->p_ll = vec_init(-map->viewport_width / 2, -map->viewport_height / 2, map->focal_length);
-	map->p_hl = vec_init(-map->viewport_width / 2, map->viewport_height / 2, map->focal_length);
-	map->p_lr = vec_init(map->viewport_width / 2, -map->viewport_height / 2, map->focal_length);
+	map->p_ll = vec_init(-map->viewport_width / 2,
+				-map->viewport_height / 2, map->focal_length);
+	map->p_hl = vec_init(-map->viewport_width / 2,
+				map->viewport_height / 2, map->focal_length);
+	map->p_lr = vec_init(map->viewport_width / 2,
+				-map->viewport_height / 2, map->focal_length);
 	make_view_plane(map);
 	map->vertical = vec_minus(map->p_hl, map->p_ll);
-	map->horizontal = vec_minus(map->p_lr, map->p_ll);	
+	map->horizontal = vec_minus(map->p_lr, map->p_ll);
 	if (opt == 0)
 		return (start_world(map, -1, -1));
-	return (start_make_bmp(map));
+	return (start_make_bmp(map, -1, -1, color_init(1, 1, 1)));
 }
 
 int					main(int ac, char **av)

@@ -6,11 +6,11 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 20:15:32 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/13 22:37:04 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/13 22:37:04 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "mini_rt.h"
 
 int				tri_p_int_tri(t_data_tri *data, t_vec p)
 {
@@ -47,7 +47,8 @@ double			tri_hit(void *data, t_vec origin, t_vec u_dir)
 	n = ((t_data_tri *)data)->nor;
 	u = vec_minus(((t_data_tri *)data)->p3, ((t_data_tri *)data)->p1);
 	v = vec_minus(((t_data_tri *)data)->p2, ((t_data_tri *)data)->p1);
-	t = (vec_dot(n, ((t_data_tri *)data)->p1) - vec_dot(n, origin)) / vec_dot(n, u_dir);
+	t = (vec_dot(n, ((t_data_tri *)data)->p1) -
+					vec_dot(n, origin)) / vec_dot(n, u_dir);
 	if (t <= 0)
 		return (-1.0);
 	lp = vec_plus(origin, vec_scala_multi(u_dir, t));
@@ -56,7 +57,8 @@ double			tri_hit(void *data, t_vec origin, t_vec u_dir)
 	return (-1.0);
 }
 
-t_shade			tri_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_vec origin)
+t_shade			tri_get_colt(t_map_info *map, size_t obj_idx,
+								size_t lig_idx, t_vec origin)
 {
 	t_shade			ret;
 	t_vec			u_dir;
@@ -71,9 +73,11 @@ t_shade			tri_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_vec o
 	if (ray_is_block(map, obj_idx, origin, u_dir) != -1.0 &&
 			ray_is_block(map, obj_idx, origin, u_dir) < t)
 		return (ret);
-	ret.diff_ratio = map->lights[lig_idx]->ratio * fmax(0, fabs(vec_dot(u_dir, nor)));
+	ret.diff_ratio = map->lights[lig_idx]->ratio *
+								fmax(0, fabs(vec_dot(u_dir, nor)));
 	h = vec_to_unit(vec_minus(map->origin, origin));
 	h = vec_to_unit(vec_plus(u_dir, h));
-	ret.spec_ratio = pow(fmax(0, fabs(vec_dot(h, nor))), map->lights[lig_idx]->spec_n);
+	ret.spec_ratio = pow(fmax(0, fabs(vec_dot(h, nor))),
+								map->lights[lig_idx]->spec_n);
 	return (ret);
 }

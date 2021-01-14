@@ -6,11 +6,11 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 02:41:12 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/13 20:22:12 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/13 20:22:12 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "mini_rt.h"
 
 t_color				color_plus(t_color a, t_color b, t_color clamp)
 {
@@ -58,7 +58,8 @@ t_color				get_spec_col(t_map_info *map, size_t idx)
 		return (color_init(0, 0, 0));
 }
 
-t_color				get_hit_col(t_map_info *map, t_vec unit_dir, double t_max, size_t hit_idx)
+t_color				get_hit_col(t_map_info *map, t_vec unit_dir,
+									double t_max, size_t hit_idx)
 {
 	t_color			diff_col;
 	t_color			spec_col;
@@ -70,10 +71,13 @@ t_color				get_hit_col(t_map_info *map, t_vec unit_dir, double t_max, size_t hit
 	shader = shade_init(0, 0, 0);
 	fp = col_func_mapper(map, hit_idx);
 	while (idx < map->lights_num)
-		shader = shade_plus(shader, fp(map, hit_idx, idx++, ray_at(map->origin, unit_dir, t_max)));
+		shader = shade_plus(shader, fp(map, hit_idx, idx++,
+								ray_at(map->origin, unit_dir, t_max)));
 	diff_col = get_diff_col(map, hit_idx);
 	spec_col = get_spec_col(map, hit_idx);
-	diff_col = color_scala_multi(diff_col, shader.diff_ratio + map->ambient.ratio, diff_col);
-	spec_col = color_scala_multi(spec_col, shader.spec_ratio, color_init(1.0, 1.0, 1.0));
+	diff_col = color_scala_multi(diff_col,
+				shader.diff_ratio + map->ambient.ratio, diff_col);
+	spec_col = color_scala_multi(spec_col,
+				shader.spec_ratio, color_init(1.0, 1.0, 1.0));
 	return (color_plus(diff_col, spec_col, color_init(1.0, 1.0, 1.0)));
 }

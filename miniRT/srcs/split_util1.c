@@ -6,11 +6,11 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 03:13:25 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/06 21:06:53 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/06 21:06:53 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "mini_rt.h"
 
 unsigned int	ft_get_cnt(char *str, char *charset)
 {

@@ -6,11 +6,11 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 19:16:10 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/12 22:15:15 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/12 22:15:15 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "mini_rt.h"
 
 int				ft_puterror(int opt)
 {

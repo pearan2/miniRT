@@ -6,11 +6,11 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/07 19:04:03 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/11 00:38:38 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/11 00:38:38 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "mini_rt.h"
 
 t_vec			rotate_by_x(t_vec origin, double theta_base_x)
 {
@@ -53,13 +53,11 @@ void			rotate_by_unit(t_map_info *map)
 	map->p_ll = rotate_by_x(map->p_ll, ra_x);
 	map->p_lr = rotate_by_x(map->p_lr, ra_x);
 	map->p_hl = rotate_by_x(map->p_hl, ra_x);
-
 	ra_y = atan2(map->orient.x, map->orient.z) - atan2(map->p_c.x, map->p_c.z);
 	map->p_c = rotate_by_y(map->p_c, ra_y);
 	map->p_ll = rotate_by_y(map->p_ll, ra_y);
 	map->p_lr = rotate_by_y(map->p_lr, ra_y);
 	map->p_hl = rotate_by_y(map->p_hl, ra_y);
-
 	ra_z = atan2(map->orient.y, map->orient.x) - atan2(map->p_c.y, map->p_c.x);
 	map->p_c = rotate_by_z(map->p_c, ra_z);
 	map->p_ll = rotate_by_z(map->p_ll, ra_z);
@@ -78,13 +76,4 @@ void			make_view_plane(t_map_info *map)
 	map->p_ll = vec_plus(map->p_ll, map->origin);
 	map->p_lr = vec_plus(map->p_lr, map->origin);
 	map->p_hl = vec_plus(map->p_hl, map->origin);
-
-	// t_vec			framecenterToOrigin = vec_minus(map->origin, map->p_c);
-	// t_vec			framecenterToll		= vec_minus(map->p_ll, map->p_c);
-	// t_vec			framecenterTohl		= vec_minus(map->p_hl, map->p_c);
-	// t_vec			framecenterTolr		= vec_minus(map->p_lr, map->p_c);
-	
-	// printf("%f\n", vec_dot(framecenterToOrigin, framecenterToll));
-	// printf("%f\n", vec_dot(framecenterToOrigin, framecenterTohl));
-	// printf("%f\n", vec_dot(framecenterToOrigin, framecenterTolr));
 }

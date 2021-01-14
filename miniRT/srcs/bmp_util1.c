@@ -6,11 +6,11 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 23:40:42 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/14 01:13:35 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/14 04:17:39 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "mini_rt.h"
 
 t_bmfh			bmp_get_file_header(t_map_info *m)
 {

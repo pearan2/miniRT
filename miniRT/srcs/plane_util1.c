@@ -6,11 +6,11 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/10 17:39:25 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/13 04:34:35 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/13 04:34:35 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "mini_rt.h"
 
 double			plane_hit(void *data, t_vec origin, t_vec u_dir)
 {
@@ -26,7 +26,8 @@ double			plane_hit(void *data, t_vec origin, t_vec u_dir)
 	return (t);
 }
 
-t_shade			plane_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_vec origin)
+t_shade			plane_get_colt(t_map_info *map, size_t obj_idx,
+							size_t lig_idx, t_vec origin)
 {
 	t_shade			ret;
 	t_vec			u_dir;
@@ -41,9 +42,11 @@ t_shade			plane_get_colt(t_map_info *map, size_t obj_idx , size_t lig_idx, t_vec
 	if (ray_is_block(map, obj_idx, origin, u_dir) != -1.0 &&
 			ray_is_block(map, obj_idx, origin, u_dir) < t)
 		return (ret);
-	ret.diff_ratio = map->lights[lig_idx]->ratio * fmax(0, fabs(vec_dot(u_dir, nor)));
+	ret.diff_ratio = map->lights[lig_idx]->ratio *
+								fmax(0, fabs(vec_dot(u_dir, nor)));
 	h = vec_to_unit(vec_minus(map->origin, origin));
 	h = vec_to_unit(vec_plus(u_dir, h));
-	ret.spec_ratio = pow(fmax(0, fabs(vec_dot(h, nor))), map->lights[lig_idx]->spec_n);
+	ret.spec_ratio = pow(fmax(0, fabs(vec_dot(h, nor))),
+								map->lights[lig_idx]->spec_n);
 	return (ret);
 }

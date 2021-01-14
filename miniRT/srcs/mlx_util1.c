@@ -6,11 +6,11 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 00:06:50 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/06 19:42:57 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/06 19:42:57 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "mini_rt.h"
 
 void	ft_mlx_pixel_put(t_data *data, int x, int y, t_color col)
 {

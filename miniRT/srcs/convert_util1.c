@@ -6,11 +6,11 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 13:55:48 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/07 04:25:48 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/07 04:25:48 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "mini_rt.h"
 
 int			ft_atoi(const char *str)
 {
@@ -38,7 +38,7 @@ int			ft_is_double(const char *str)
 {
 	int			num_of_point;
 	size_t		idx;
-	
+
 	idx = 0;
 	num_of_point = 0;
 	if (str[idx] == '-')

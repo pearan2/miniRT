@@ -6,11 +6,11 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 23:19:15 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/13 20:08:37 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/13 20:08:37 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "mini_rt.h"
 
 int				parse_light(t_map_info *m, char **splited)
 {
@@ -86,7 +86,7 @@ int				parse_plane(t_map_info *m, char **splited)
 int				parse_square(t_map_info *m, char **splited)
 {
 	t_data_square			*t;
-	
+
 	if (parse_spl_len(splited) != 5)
 		return (-1);
 	if (!(t = malloc(sizeof(t_data_square))))

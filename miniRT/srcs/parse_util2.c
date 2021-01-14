@@ -6,11 +6,11 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 22:36:21 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/13 20:15:15 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/13 20:15:15 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "mini_rt.h"
 
 size_t			parse_spl_len(char **splited)
 {

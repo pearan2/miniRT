@@ -6,11 +6,11 @@
 /*   By: honlee <honlee@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 22:53:19 by honlee            #+#    #+#             */
-/*   Updated: 2021/01/13 20:08:39 by honlee           ###   ########seoul.kr  */
+/*   Updated: 2021/01/13 20:08:39 by honlee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "miniRT.h"
+#include "mini_rt.h"
 
 double			vec_length_squared(t_vec a)
 {
@@ -25,6 +25,7 @@ double			vec_length(t_vec a)
 t_vec			vec_scala_multi(t_vec a, double t)
 {
 	t_vec				ret;
+
 	ret.x = a.x * t;
 	ret.y = a.y * t;
 	ret.z = a.z * t;
@@ -34,6 +35,7 @@ t_vec			vec_scala_multi(t_vec a, double t)
 t_vec			vec_init(double x, double y, double z)
 {
 	t_vec				ret;
+
 	ret.x = x;
 	ret.y = y;
 	ret.z = z;
