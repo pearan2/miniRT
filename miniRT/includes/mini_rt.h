@@ -322,5 +322,7 @@ t_shade					tri_get_colt(t_map_info *map, size_t obj_idx,
 t_bmfh					bmp_get_file_header(t_map_info *m);
 t_bmih					bmp_get_info_header(t_map_info *m);
 t_rgbt					bmp_get_rgbt_by_color(t_color color);
+void					bmp_set_header(t_map_info *m, int fd);
+void					bmp_close_and_free(t_map_info *m, int fd);
 
 #endif

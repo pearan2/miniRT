@@ -34,6 +34,7 @@ int					mouse_exit(t_wins *wins)
 {
 	mlx_clear_window(wins->mlx, wins->win);
 	mlx_destroy_window(wins->mlx, wins->win);
+	map_free(wins->map);
 	exit(0);
 	return (0);
 }

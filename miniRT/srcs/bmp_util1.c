@@ -12,6 +12,23 @@
 
 #include "mini_rt.h"
 
+void			bmp_close_and_free(t_map_info *m, int fd)
+{
+	map_free(m);
+	close(fd);
+}
+
+void			bmp_set_header(t_map_info *m, int fd)
+{
+	t_bmfh		bmfh;
+	t_bmih		bmih;
+
+	bmfh = bmp_get_file_header(m);
+	bmih = bmp_get_info_header(m);
+	write(fd, &bmfh, 14);
+	write(fd, &bmih, 40);
+}
+
 t_bmfh			bmp_get_file_header(t_map_info *m)
 {
 	t_bmfh			ret;

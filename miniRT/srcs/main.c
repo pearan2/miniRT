@@ -55,31 +55,23 @@ int					start_world(t_map_info *map, int i, int j)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
 					&img.line_length, &img.endian);
 	draw_image(&wins, i, j);
-
-	mlx_hook(wins.win, 2, 1L<<0, &key_press, &wins);
-	//in linux
-	mlx_hook(wins.win, 33, 1L<<17, &mouse_exit, &wins);
-	//in mac
-	//mlx_hook(wins.win, 17, 0, &mouse_exit, &wins);
+	mlx_hook(wins.win, 2, 1L << 0, &key_press, &wins);
+	mlx_hook(wins.win, 33, 1L << 17, &mouse_exit, &wins);
 	mlx_loop(wins.mlx);
-	map_free(map);
 	return (1);
 }
 
 int					start_make_bmp(t_map_info *map, int j, int i, t_color pc)
 {
 	int			fd;
-	t_bmfh		bmfh;
-	t_bmih		bmih;
 	t_rgbt		rgbt;
+	int			zero;
 
+	zero = 0;
 	fd = open("miniRT.bmp", O_WRONLY | O_CREAT, 0644);
 	if (fd == -1)
 		return (ft_puterror(1));
-	bmfh = bmp_get_file_header(map);
-	bmih = bmp_get_info_header(map);
-	write(fd, &bmfh, 14);
-	write(fd, &bmih, 40);
+	bmp_set_header(map, fd);
 	while (++j < map->image_height)
 	{
 		i = -1;
@@ -90,8 +82,11 @@ int					start_make_bmp(t_map_info *map, int j, int i, t_color pc)
 			rgbt = bmp_get_rgbt_by_color(pc);
 			write(fd, &rgbt, 3);
 		}
+		i = -1;
+		while (++i < (4 - (map->image_width * 3) % 4) % 4)
+			write(fd, &zero, 1);
 	}
-	close(fd);
+	bmp_close_and_free(map, fd);
 	return (1);
 }
 

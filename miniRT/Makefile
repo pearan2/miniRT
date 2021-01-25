@@ -61,8 +61,8 @@ re			:		fclean all
 
 dbg			:		fclean
 					${CC} ${DCF} -o ${NAME}
-					lldb ${NAME} -- test/1.rt
+					lldb ${NAME} -- scene/1.rt
 
 test		:		fclean
 					${CC} ${TCF} -o ${NAME}
-					./${NAME} test/1.rt
+					./${NAME} scene/1.rt

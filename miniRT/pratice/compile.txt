@@ -1,1 +1,0 @@
-clang -Wall -Wextra -Werror  -lbsd -lmlx -lXext -lX11
