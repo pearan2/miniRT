@@ -54,4 +54,8 @@ void			map_free(t_map_info *map)
 		free(map->objs[idx++]);
 	}
 	free(map->objs);
+	idx = 0;
+	while (idx < map->c_cnt)
+		free(map->cams[idx++]);
+	free(map->cams);
 }

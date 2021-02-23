@@ -32,10 +32,6 @@ int				parse_resol(t_map_info *map, char **splited)
 		return (-1);
 	if (map->image_width <= 0)
 		return (-1);
-	if (map->image_height > RESOL_Y_MAX)
-		map->image_height = RESOL_Y_MAX;
-	if (map->image_width > RESOL_X_MAX)
-		map->image_width = RESOL_X_MAX;
 	map->r_cnt++;
 	return (0);
 }

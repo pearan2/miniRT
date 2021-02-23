@@ -47,6 +47,11 @@ int					start_world(t_map_info *map, int i, int j)
 	t_data		img;
 
 	wins.mlx = mlx_init();
+	mlx_get_screen_size(wins.mlx, &map->screen_x, &map->screen_y);
+	if (map->image_width > map->screen_x)
+		map->image_width = map->screen_x;
+	if (map->image_height > map->screen_y)
+		map->image_height = map->screen_y;
 	wins.win = mlx_new_window(wins.mlx, map->image_width,
 					map->image_height, "miniRT");
 	wins.img = &img;

@@ -22,7 +22,7 @@ int					key_press(int keycode, t_wins *wins)
 			wins->map->n_c_idx++;
 		if (wins->map->n_c_idx < 0)
 			wins->map->n_c_idx = wins->map->c_cnt - 1;
-		if (wins->map->n_c_idx >= (int) wins->map->c_cnt)
+		if (wins->map->n_c_idx >= (int)wins->map->c_cnt)
 			wins->map->n_c_idx = 0;
 		mlx_clear_window(wins->mlx, wins->win);
 		make_map_from_cam(wins->map, wins->map->n_c_idx);

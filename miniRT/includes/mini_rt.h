@@ -24,8 +24,6 @@
 # include <string.h>
 # include <errno.h>
 
-# define RESOL_X_MAX 1920
-# define RESOL_Y_MAX 1080
 # define PI 3.1415926535897
 
 typedef struct			s_data
@@ -187,6 +185,8 @@ typedef struct			s_map_info
 	size_t				o_iter;
 	size_t				c_iter;
 	int					n_c_idx;
+	int					screen_x;
+	int					screen_y;
 	size_t				r_cnt;
 	size_t				c_cnt;
 	size_t				a_cnt;
