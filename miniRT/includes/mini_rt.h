@@ -53,7 +53,7 @@ typedef struct			s_vec
 
 typedef struct			s_shade
 {
-	double				diff_ratio;
+	t_color				diff_ratio;
 	double				spec_ratio;
 	double				som_ratio;
 }						t_shade;
@@ -126,6 +126,13 @@ typedef struct			s_data_cylinder
 	t_color				spec_color;
 }						t_data_cylinder;
 
+typedef struct			s_cam
+{
+	t_vec				origin;
+	t_vec				orient;
+	double				fov_horizontal;
+}						t_cam;
+
 typedef struct			s_data_tri
 {
 	t_vec				p1;
@@ -171,12 +178,15 @@ typedef struct			s_map_info
 	t_vec				p_c;
 	t_obj				**objs;
 	t_light				**lights;
+	t_cam				**cams;
 	t_light				ambient;
 	t_ro_ras			rotate_info;
 	size_t				objs_num;
 	size_t				lights_num;
 	size_t				l_iter;
 	size_t				o_iter;
+	size_t				c_iter;
+	int					n_c_idx;
 	size_t				r_cnt;
 	size_t				c_cnt;
 	size_t				a_cnt;
@@ -258,7 +268,7 @@ t_shade					sphere_get_colt(t_map_info *map, size_t obj_idx,
 								size_t lig_idx, t_vec origin);
 double					ray_is_block(t_map_info *map, size_t obj_idx,
 								t_vec origin, t_vec u_dir);
-t_shade					shade_init(double a, double b, double c);
+t_shade					shade_init(t_color a, double b, double c);
 t_shade					shade_plus(t_shade a, t_shade b);
 int						ft_puterror(int opt);
 int						parse_make_map(t_map_info *map, const char *path);
@@ -324,5 +334,8 @@ t_bmih					bmp_get_info_header(t_map_info *m);
 t_rgbt					bmp_get_rgbt_by_color(t_color color);
 void					bmp_set_header(t_map_info *m, int fd);
 void					bmp_close_and_free(t_map_info *m, int fd);
+t_color					color_multi(t_color a, t_color b, t_color clamp);
+int						map_checker(t_map_info *map, int opt, size_t c_idx);
+void					make_map_from_cam(t_map_info *map, size_t c_idx);
 
 #endif

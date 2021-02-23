@@ -26,7 +26,7 @@ double			disk_hit(void *data, t_vec origin, t_vec u_dir)
 		return (-1.0);
 	lp = vec_plus(origin, vec_scala_multi(u_dir, t));
 	lp = vec_minus(lp, p);
-	if (vec_dot(lp, lp) <= ((t_data_disk *)data)->radius)
+	if (vec_length(lp) <= ((t_data_disk *)data)->radius)
 		return (t);
 	return (-1.0);
 }
@@ -41,13 +41,15 @@ t_shade			disk_get_colt(t_map_info *map, size_t obj_idx,
 	t_vec			nor;
 
 	nor = ((t_data_disk *)map->objs[obj_idx]->data)->nor;
-	ret = shade_init(0, 0, 0);
+	ret = shade_init(color_init(0, 0, 0), 0, 0);
 	u_dir = vec_to_unit(vec_minus(map->lights[lig_idx]->center, origin));
 	t = ((map->lights[lig_idx]->center.x) - origin.x) / (u_dir.x);
 	if (ray_is_block(map, obj_idx, origin, u_dir) != -1.0 &&
 			ray_is_block(map, obj_idx, origin, u_dir) < t)
 		return (ret);
-	ret.diff_ratio = map->lights[lig_idx]->ratio * fmax(0, vec_dot(u_dir, nor));
+	ret.diff_ratio = color_scala_multi(map->lights[lig_idx]->color,
+	map->lights[lig_idx]->ratio * fmax(0, vec_dot(u_dir, nor)),
+	color_init(1.0, 1.0, 1.0));
 	h = vec_to_unit(vec_minus(map->origin, origin));
 	h = vec_to_unit(vec_plus(u_dir, h));
 	ret.spec_ratio = pow(fmax(0, vec_dot(h, nor)),

@@ -33,6 +33,7 @@ SRCNAME		=		\
 					parse_util4.c\
 					parse_util5.c\
 					rotate_util1.c\
+					rotate_util2.c\
 					plane_util1.c\
 					event_util1.c\
 					square_util1.c\

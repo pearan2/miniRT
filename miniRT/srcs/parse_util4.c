@@ -113,17 +113,22 @@ int				parse_square(t_map_info *m, char **splited)
 
 int				parse_cam(t_map_info *map, char **splited)
 {
+	t_cam		*cam;
+
 	if (parse_spl_len(splited) != 4)
 		return (-1);
-	if (parse_vec(ft_split(splited[1], ","), &map->origin) == -1)
+	if (!(cam = malloc(sizeof(t_cam))))
 		return (-1);
-	if (parse_vec(ft_split(splited[2], ","), &map->orient) == -1)
+	if (parse_vec(ft_split(splited[1], ","), &cam->origin) == -1)
+		return (-1);
+	if (parse_vec(ft_split(splited[2], ","), &cam->orient) == -1)
 		return (-1);
 	if (!ft_is_double(splited[3]))
 		return (-1);
-	map->fov_horizontal = ft_atod(splited[3]);
-	if (map->fov_horizontal < 0.0 || map->fov_horizontal > 180.0)
+	cam->fov_horizontal = ft_atod(splited[3]);
+	if (cam->fov_horizontal < 0.0 || cam->fov_horizontal > 180.0)
 		return (-1);
-	map->c_cnt++;
+	map->cams[map->c_iter] = cam;
+	map->c_iter++;
 	return (0);
 }

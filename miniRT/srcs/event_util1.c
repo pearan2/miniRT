@@ -14,19 +14,27 @@
 
 int					key_press(int keycode, t_wins *wins)
 {
-	keycode = 0;
-	mlx_clear_window(wins->mlx, wins->win);
-	wins->map->origin = vec_plus(wins->map->origin,
-						vec_scala_multi(wins->map->orient, 0.05));
-	wins->map->p_ll = vec_plus(wins->map->p_ll,
-						vec_scala_multi(wins->map->orient, 0.05));
-	wins->map->p_lr = vec_plus(wins->map->p_lr,
-						vec_scala_multi(wins->map->orient, 0.05));
-	wins->map->p_hl = vec_plus(wins->map->p_hl,
-						vec_scala_multi(wins->map->orient, 0.05));
-	wins->map->vertical = vec_minus(wins->map->p_hl, wins->map->p_ll);
-	wins->map->horizontal = vec_minus(wins->map->p_lr, wins->map->p_ll);
-	draw_image(wins, -1, -1);
+	if (keycode == 65361 || keycode == 65363)
+	{
+		if (keycode == 65361)
+			wins->map->n_c_idx--;
+		if (keycode == 65363)
+			wins->map->n_c_idx++;
+		if (wins->map->n_c_idx < 0)
+			wins->map->n_c_idx = wins->map->c_cnt - 1;
+		if (wins->map->n_c_idx >= (int) wins->map->c_cnt)
+			wins->map->n_c_idx = 0;
+		mlx_clear_window(wins->mlx, wins->win);
+		make_map_from_cam(wins->map, wins->map->n_c_idx);
+		draw_image(wins, -1, -1);
+	}
+	else if (keycode == 65307)
+	{
+		mlx_clear_window(wins->mlx, wins->win);
+		mlx_destroy_window(wins->mlx, wins->win);
+		map_free(wins->map);
+		exit(0);
+	}
 	return (0);
 }
 

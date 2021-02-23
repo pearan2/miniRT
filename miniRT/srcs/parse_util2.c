@@ -28,10 +28,14 @@ int				parse_resol(t_map_info *map, char **splited)
 		return (-1);
 	map->image_width = ft_atoi(splited[1]);
 	map->image_height = ft_atoi(splited[2]);
-	if (!(map->image_width > 0 && map->image_width <= RESOL_X_MAX))
+	if (map->image_height <= 0)
 		return (-1);
-	if (!(map->image_height > 0 && map->image_height <= RESOL_Y_MAX))
+	if (map->image_width <= 0)
 		return (-1);
+	if (map->image_height > RESOL_Y_MAX)
+		map->image_height = RESOL_Y_MAX;
+	if (map->image_width > RESOL_X_MAX)
+		map->image_width = RESOL_X_MAX;
 	map->r_cnt++;
 	return (0);
 }

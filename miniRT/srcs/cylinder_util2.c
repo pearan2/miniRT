@@ -34,7 +34,8 @@ double			cylinder_hit_b(t_data_cylinder *data,
 	n = data->nor;
 	ta = vec_minus(u_dir, vec_scala_multi(n, vec_dot(n, u_dir)));
 	oc = vec_minus(origin, data->center);
-	tb = vec_minus(oc, vec_scala_multi(n, vec_dot(n, oc)));
+	tb = vec_minus(oc, vec_scala_multi(n, vec_dot(n, origin)));
+	tb = vec_plus(tb, vec_scala_multi(n, vec_dot(n, data->center)));
 	return (2.0 * vec_dot(ta, tb));
 }
 
@@ -47,6 +48,7 @@ double			cylinder_hit_c(t_data_cylinder *data, t_vec origin, t_vec u_dir)
 	u_dir = vec_init(0, 0, 0);
 	n = data->nor;
 	oc = vec_minus(origin, data->center);
-	tb = vec_minus(oc, vec_scala_multi(n, vec_dot(n, oc)));
+	tb = vec_minus(oc, vec_scala_multi(n, vec_dot(n, origin)));
+	tb = vec_plus(tb, vec_scala_multi(n, vec_dot(n, data->center)));
 	return (vec_dot(tb, tb) - (data->radius * data->radius));
 }

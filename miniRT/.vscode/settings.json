@@ -1,5 +1,6 @@
 {
 	"files.associations": {
-		"*.c__": "c"
+		"*.c__": "c",
+		"mini_rt.h": "c"
 	}
 }

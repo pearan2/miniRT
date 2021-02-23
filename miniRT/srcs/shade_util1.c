@@ -12,7 +12,7 @@
 
 #include "mini_rt.h"
 
-t_shade				shade_init(double a, double b, double c)
+t_shade				shade_init(t_color a, double b, double c)
 {
 	t_shade			ret;
 
@@ -26,7 +26,8 @@ t_shade				shade_plus(t_shade a, t_shade b)
 {
 	t_shade			ret;
 
-	ret.diff_ratio = a.diff_ratio + b.diff_ratio;
+	ret.diff_ratio = color_plus(a.diff_ratio, b.diff_ratio,
+						color_init(1.0, 1.0, 1.0));
 	ret.spec_ratio = a.spec_ratio + b.spec_ratio;
 	ret.som_ratio = a.som_ratio + b.som_ratio;
 	return (ret);
