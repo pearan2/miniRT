@@ -111,7 +111,7 @@ int					main(int ac, char **av)
 	t_map_info			map;
 
 	map_init(&map);
-	if (rt_checker(av[0]) == -1)
+	if (rt_checker(av[1]) == -1)
 		return (ft_puterror(1));
 	if (ac == 2)
 	{
