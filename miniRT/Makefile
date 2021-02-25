@@ -49,12 +49,16 @@ CF			=		-Wall -Wextra -Werror -I ${INCDIR} ${SRCS} -lbsd -lmlx -lXext -lX11 -lm
 DCF			=		-g -I ${INCDIR} ${SRCS} -lbsd -lmlx -lXext -lX11 -lm
 TCF			=		-I ${INCDIR} ${SRCS} -lbsd -lmlx -lXext -lX11 -lm
 NAME		=		miniRT
+BMPNAME		=		miniRT.bmp
 
 ${NAME}		:		
 					${CC} ${CF} -o ${NAME}
 
-fclean		:
+fclean		:		clean
 					rm -f ${NAME}
+
+clean		:		
+					rm -f ${BMPNAME}
 
 all			:		${NAME}
 

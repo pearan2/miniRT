@@ -335,7 +335,7 @@ t_rgbt					bmp_get_rgbt_by_color(t_color color);
 void					bmp_set_header(t_map_info *m, int fd);
 void					bmp_close_and_free(t_map_info *m, int fd);
 t_color					color_multi(t_color a, t_color b, t_color clamp);
-int						map_checker(t_map_info *map, int opt, size_t c_idx);
+int						map_checker(t_map_info *map, int opt);
 void					make_map_from_cam(t_map_info *map, size_t c_idx);
 
 #endif

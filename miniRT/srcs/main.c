@@ -52,6 +52,7 @@ int					start_world(t_map_info *map, int i, int j)
 		map->image_width = map->screen_x;
 	if (map->image_height > map->screen_y)
 		map->image_height = map->screen_y;
+	make_map_from_cam(map, 0);
 	wins.win = mlx_new_window(wins.mlx, map->image_width,
 					map->image_height, "miniRT");
 	wins.img = &img;
@@ -95,13 +96,13 @@ int					start_make_bmp(t_map_info *map, int j, int i, t_color pc)
 	return (1);
 }
 
-int					map_checker(t_map_info *map, int opt, size_t c_idx)
+int					map_checker(t_map_info *map, int opt)
 {
 	if (map->r_cnt != 1 || map->c_cnt <= 0 || map->a_cnt != 1)
 		return (ft_puterror(1));
-	make_map_from_cam(map, c_idx);
 	if (opt == 0)
 		return (start_world(map, -1, -1));
+	make_map_from_cam(map, 0);
 	return (start_make_bmp(map, -1, -1, color_init(1, 1, 1)));
 }
 
@@ -118,7 +119,7 @@ int					main(int ac, char **av)
 		if (parse_make_map(&map, av[1]) == -1)
 			return (ft_puterror(1));
 		else
-			return (map_checker(&map, 0, map.n_c_idx));
+			return (map_checker(&map, 0));
 	}
 	else if (ac == 3 && av[2][0] == '-' && av[2][1] == '-' && av[2][2] == 's'
 					&& av[2][3] == 'a' && av[2][4] == 'v' && av[2][5] == 'e'
@@ -127,7 +128,7 @@ int					main(int ac, char **av)
 		if (parse_make_map(&map, av[1]) == -1)
 			return (ft_puterror(1));
 		else
-			return (map_checker(&map, 1, map.n_c_idx));
+			return (map_checker(&map, 1));
 	}
 	else
 		return (ft_puterror(0));
