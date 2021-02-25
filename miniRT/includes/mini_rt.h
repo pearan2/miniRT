@@ -337,5 +337,7 @@ void					bmp_close_and_free(t_map_info *m, int fd);
 t_color					color_multi(t_color a, t_color b, t_color clamp);
 int						map_checker(t_map_info *map, int opt);
 void					make_map_from_cam(t_map_info *map, size_t c_idx);
+void					map_init(t_map_info *map);
+int						rt_checker(char *str);
 
 #endif

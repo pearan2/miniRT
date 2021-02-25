@@ -41,7 +41,8 @@ SRCNAME		=		\
 					cylinder_util1.c\
 					cylinder_util2.c\
 					tri_util1.c\
-					bmp_util1.c
+					bmp_util1.c\
+					map_util1.c
 SRCS		=		${addprefix ${SRCDIR}, ${SRCNAME}}
 INCDIR		=		./includes/
 CC			=		clang

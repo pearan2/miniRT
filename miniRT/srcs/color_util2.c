@@ -87,7 +87,7 @@ t_color				get_hit_col(t_map_info *map, t_vec unit_dir,
 	spec_col = get_spec_col(map, hit_idx);
 	shader.diff_ratio.r += map->ambient.ratio;
 	shader.diff_ratio.g += map->ambient.ratio;
-	shader.diff_ratio.r += map->ambient.ratio;
+	shader.diff_ratio.b += map->ambient.ratio;
 	diff_col = color_multi(diff_col, shader.diff_ratio, diff_col);
 	spec_col = color_scala_multi(spec_col,
 				shader.spec_ratio, color_init(1.0, 1.0, 1.0));

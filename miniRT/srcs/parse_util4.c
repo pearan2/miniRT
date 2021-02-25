@@ -120,14 +120,16 @@ int				parse_cam(t_map_info *map, char **splited)
 	if (!(cam = malloc(sizeof(t_cam))))
 		return (-1);
 	if (parse_vec(ft_split(splited[1], ","), &cam->origin) == -1)
-		return (-1);
+		return (ft_free(cam, -1));
 	if (parse_vec(ft_split(splited[2], ","), &cam->orient) == -1)
-		return (-1);
+		return (ft_free(cam, -1));
 	if (!ft_is_double(splited[3]))
-		return (-1);
+		return (ft_free(cam, -1));
+	if (cam->orient.x == 0 && cam->orient.y == 0 && cam->orient.z == 0)
+		return (ft_free(cam, -1));
 	cam->fov_horizontal = ft_atod(splited[3]);
 	if (cam->fov_horizontal < 0.0 || cam->fov_horizontal > 180.0)
-		return (-1);
+		return (ft_free(cam, -1));
 	map->cams[map->c_iter] = cam;
 	map->c_iter++;
 	return (0);

@@ -110,10 +110,9 @@ int					main(int ac, char **av)
 {
 	t_map_info			map;
 
-	map.r_cnt = 0;
-	map.c_cnt = 0;
-	map.a_cnt = 0;
-	map.n_c_idx = 0;
+	map_init(&map);
+	if (rt_checker(av[0]) == -1)
+		return (ft_puterror(1));
 	if (ac == 2)
 	{
 		if (parse_make_map(&map, av[1]) == -1)
