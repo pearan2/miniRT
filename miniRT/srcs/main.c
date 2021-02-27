@@ -38,7 +38,7 @@ t_color				do_loop(t_map_info *map, double u, double v, size_t hit_idx)
 	}
 	if (t_max != DBL_MAX)
 		return (get_hit_col(map, unit_dir, t_max, hit_idx));
-	return (color_init(0.7, 0.7, 0.7));
+	return (color_init(0, 0, 0));
 }
 
 int					start_world(t_map_info *map, int i, int j)

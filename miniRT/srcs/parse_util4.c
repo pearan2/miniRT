@@ -128,7 +128,7 @@ int				parse_cam(t_map_info *map, char **splited)
 	if (cam->orient.x == 0 && cam->orient.y == 0 && cam->orient.z == 0)
 		return (ft_free(cam, -1));
 	cam->fov_horizontal = ft_atod(splited[3]);
-	if (cam->fov_horizontal < 0.0 || cam->fov_horizontal > 180.0)
+	if (cam->fov_horizontal <= 0.0 || cam->fov_horizontal >= 180.0)
 		return (ft_free(cam, -1));
 	map->cams[map->c_iter] = cam;
 	map->c_iter++;

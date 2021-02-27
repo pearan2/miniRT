@@ -27,6 +27,8 @@ int				rt_checker(char *str)
 	idx = 0;
 	while (str[idx] != 0)
 		idx++;
+	if (idx <= 3)
+		return (-1);
 	if (!(str[idx - 3] == '.' && str[idx - 2] == 'r'
 			&& str[idx - 1] == 't'))
 		return (-1);
