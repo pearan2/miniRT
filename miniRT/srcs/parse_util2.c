@@ -41,6 +41,8 @@ int				parse_amb(t_map_info *map, char **splited)
 	if (parse_spl_len(splited) != 3)
 		return (-1);
 	map->ambient.ratio = ft_atod(splited[1]);
+	if (map->ambient.ratio < 0.0 || map->ambient.ratio > 1.0)
+		return (-1);
 	if ((parse_color(ft_split(splited[2], ","), &map->ambient.color)) == -1)
 		return (-1);
 	map->a_cnt++;
